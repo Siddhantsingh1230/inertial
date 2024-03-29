@@ -1,11 +1,11 @@
-import React from 'react'
+import MainWrapper from "./components/MainWrapper";
 
 const App = () => {
   return (
     <>
-      App
+      <MainWrapper />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
