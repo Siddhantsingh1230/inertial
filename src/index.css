@@ -27,12 +27,140 @@ html {
   font-family: GreySansBlack;
   src: url("./assets/fonts/GreySansBlack.ttf");
 }
+@font-face {
+  font-family: GreySans;
+  src: url("./assets/fonts/GreySans.ttf");
+}
 
 .GreySansBlack {
   font-family: GreySansBlack;
 }
+.GreySans {
+  font-family: GreySans;
+}
 
 .inter {
   font-family: "Inter", sans-serif;
+}
 
+.glowingBtn {
+  position: relative;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+
+  z-index: 1;
+}
+
+.glowingBtn:hover {
+  animation: glowingBtnAnimate 8s linear infinite;
+}
+
+@keyframes glowingBtnAnimate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+.glowingBtn:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    #03a9f4,
+    #f441a5,
+    rgb(251, 113, 133),
+    rgb(217, 70, 239),
+    #03a9f4
+  );
+  background-size: 400%;
+  border-radius: 40px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.glowingBtn:hover:before {
+  filter: blur(20px);
+  opacity: 1;
+  animation: glowingBtnAnimate 8s linear infinite;
+}
+
+.topOverline::before {
+  content: "";
+  height: 5px;
+  width: 100%;
+  background: #64f11a;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.linearFade::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  background: linear-gradient(to right, #010101 5%, transparent 95%);
+}
+.horizontalLinearfade::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  background: linear-gradient(to right, #010101 10%, transparent);
+}
+
+.horizontalLinearfade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  background: linear-gradient(to left, #010101 10%, transparent);
+}
+
+.swarmFade::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #010101 40%, transparent 60%);
+}
+.swarmFade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60%;
+  width: 100%;  
+  background: linear-gradient(to bottom, #010101 3%, transparent 97%);
+}
+
+.downFade::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 30%;
+  width: 100%;  
+  background: linear-gradient(to top, #010101 1%, transparent 97%);
 }
