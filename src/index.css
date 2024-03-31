@@ -20,3 +20,19 @@ html {
   width: 100%;
   height: 100%;
 }
+
+/* Fonts */
+
+@font-face {
+  font-family: GreySansBlack;
+  src: url("./assets/fonts/GreySansBlack.ttf");
+}
+
+.GreySansBlack {
+  font-family: GreySansBlack;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+
+}

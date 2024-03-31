@@ -6,6 +6,7 @@ import ForgotPwd from "../pages/ForgotPwd";
 import ResetPwd from "../pages/ResetPwd";
 import PageNotFound from "../pages/PageNotFound";
 import Home from "../pages/Home";
+import LandingPage from "../pages/LandingPage";
 
 const MainWrapper = () => {
   return (
@@ -20,6 +21,7 @@ const MainWrapper = () => {
             </Master>
           }
         />
+        <Route exact path="/start" element={<LandingPage />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/forgotpassword" element={<ForgotPwd />} />
