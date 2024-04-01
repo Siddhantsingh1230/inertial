@@ -164,3 +164,7 @@ html {
   width: 100%;  
   background: linear-gradient(to top, #010101 1%, transparent 97%);
 }
+
+.skew{
+  transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
+}

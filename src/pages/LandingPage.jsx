@@ -35,7 +35,7 @@ const LandingPage = () => {
             <img src={LogoTrans} className="w-6  " alt="" />
             <p className="text-white text-xl inter  font-bold select-none uppercase ">
               Inerti<span className="text-[#00CBFB] mx-1">.</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] lowercase">
+              <span className="text-transparent inter  font-bold bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] uppercase">
                 al
               </span>
             </p>
@@ -81,10 +81,9 @@ const LandingPage = () => {
             </p>
             <p className="uppercase GreySansBlack text-white text-6xl mx-12 w-full">
               <span
-                title="RARE"
                 className="GreySansBlack text-transparent bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6]"
               >
-                RARE
+                YOUR
               </span>
               <span className="GreySans text-2xl  mx-7">Digital</span>
               <span className="GreySansBlack">Art</span>
@@ -104,7 +103,7 @@ const LandingPage = () => {
               <span className="h-[70%] w-[8px]  rounded-md  inline-block  bg-[#DE26F6] mr-2"></span>
               <span className="h-[70%] w-[8px]  rounded-md  inline-block  bg-[#DE26F6]"></span>
               <span className="GreySansBlack text-transparent bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] relative z-30">
-                NFTS
+                FRAMES
               </span>
             </p>
           </div>
@@ -170,7 +169,7 @@ const LandingPage = () => {
                 40K+
               </p>
               <p className="text-gray-600 text-xs font-bold relative ">
-                Artwork
+                Frames
               </p>
             </div>
             <div className="mx-12 flex flex-col items-center h-[60%]">
@@ -183,7 +182,7 @@ const LandingPage = () => {
                 15K+
               </p>
               <p className="text-gray-600 text-xs font-bold relative ">
-                Auctions
+                Auras
               </p>
             </div>
             <div className="mx-12 flex flex-col items-center h-[60%]">
@@ -196,14 +195,14 @@ const LandingPage = () => {
                 27K+
               </p>
               <p className="text-gray-600 text-xs font-bold relative ">
-                Artists
+                Whispers
               </p>
             </div>
           </div>
         </div>
 
         {/* 3d image grid*/}
-        <div className="z-10 swarmFade w-full h-full flex gap-5 absolute top-0 left-0 py-5">
+        <div className="z-10 skew swarmFade w-full h-full flex gap-5 absolute top-0 left-0 py-5">
           <div className="flex flex-col gap-5 h-full w-[40%] overflow-hidden">
             <div className="w-full">
               <img
@@ -255,7 +254,7 @@ const LandingPage = () => {
                 alt=""
               />
             </div>
-            <div className="flex w-full gap-5">
+            <div className="flex w-full gap-5 z-50 bg-gray-600 rounded-xl ">
               <img
                 className="rounded-xl object-cover w-full h-96"
                 src={art11}
