@@ -151,20 +151,40 @@ html {
   top: 0;
   left: 0;
   height: 60%;
-  width: 100%;  
+  width: 100%;
   background: linear-gradient(to bottom, #010101 3%, transparent 97%);
 }
 
-.downFade::after{
+.downFade::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   height: 30%;
-  width: 100%;  
+  width: 100%;
   background: linear-gradient(to top, #010101 1%, transparent 97%);
 }
 
-.skew{
+.skew {
   transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
+}
+
+.login-skew {
+  transform: perspective(1000px) rotateY(-15deg) rotateX(15deg); /* Apply the skew effect */
+}
+
+.login-skew-items {
+  animation: animated-grid 10s linear infinite;
+}
+
+@keyframes animated-grid {
+  0% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
