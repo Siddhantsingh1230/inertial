@@ -21,8 +21,7 @@ import art14 from "../assets/images/art14.jpg";
 import art15 from "../assets/images/art15.jpg";
 import art16 from "../assets/images/art16.jpg";
 import art17 from "../assets/images/art17.jpg";
-
-
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -45,14 +44,18 @@ const LandingPage = () => {
             <p className="text-sm text-white cursor-pointer h-full relative topOverline flex justify-center items-center px-3">
               Explore
             </p>
-            <p className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500">
-              About
-            </p>
+            <Link
+              to="/chronicles"
+              className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500"
+            >
+              Chronicles
+            </Link>
             <p className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500">
               Features
             </p>
-            <p className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500">
-              Community
+            <p className="group text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500 relative">
+              Contact{" "}
+              <i className="absolute group-hover:-translate-y-1  transition-all duration-100  ri-arrow-right-up-line"></i>
             </p>
           </div>
           {/* Action buttons */}
@@ -80,9 +83,7 @@ const LandingPage = () => {
               DISCOVER
             </p>
             <p className="uppercase GreySansBlack text-white text-6xl mx-12 w-full">
-              <span
-                className="GreySansBlack text-transparent bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6]"
-              >
+              <span className="GreySansBlack text-transparent bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6]">
                 YOUR
               </span>
               <span className="GreySans text-2xl  mx-7">Digital</span>
@@ -181,9 +182,7 @@ const LandingPage = () => {
               <p className="text-white text-2xl relative  GreySansBlack ">
                 15K+
               </p>
-              <p className="text-gray-600 text-xs font-bold relative ">
-                Auras
-              </p>
+              <p className="text-gray-600 text-xs font-bold relative ">Auras</p>
             </div>
             <div className="mx-12 flex flex-col items-center h-[60%]">
               <div className="h-1 w-1 rounded-full bg-gray-600"></div>
