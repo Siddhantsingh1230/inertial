@@ -31,12 +31,26 @@ html {
   font-family: GreySans;
   src: url("./assets/fonts/GreySans.ttf");
 }
+@font-face {
+  font-family: UnisonBold;
+  src: url("./assets/fonts/UnisonBold.otf");
+}
+@font-face {
+  font-family: Mojita;
+  src: url("./assets/fonts/Mojita.ttf");
+}
 
 .GreySansBlack {
   font-family: GreySansBlack;
 }
 .GreySans {
   font-family: GreySans;
+}
+.UnisonBold {
+  font-family: UnisonBold;
+}
+.Mojita {
+  font-family: Mojita;
 }
 
 .inter {
@@ -168,3 +182,13 @@ html {
 .skew{
   transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
 }
+
+.o-stretch{
+  display: inline-block;
+  border-radius: 1rem;
+  height: calc(1rem - 2px);
+  width: 2rem;
+  border:4px solid rgb(255, 255, 255) ;
+  background: #000000;
+}
+
