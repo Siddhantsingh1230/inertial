@@ -169,7 +169,7 @@ const Chronicles = () => {
           </div>
 
           {/* Footer text */}
-          <div className="w-full flex justify-center items-center flex-col">
+          <div className="w-full flex justify-center items-center flex-col select-none">
             <hr className="w-[25%] border-t-2  border-gray-500 rounded-xl mb-10" />
             <p className="text-gray-400 text-xs font-bold UnisonBold uppercase">
               WE Create Web Designs

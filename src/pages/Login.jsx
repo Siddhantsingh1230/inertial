@@ -24,9 +24,9 @@ const Login = () => {
       {/* login page main div */}
       <div className="flex flex-col bg-black w-full h-full overflow-hidden relative">
         {/* header */}
-        <div className="z-30 flex w-full h-fit relative px-16">
-          <Link to="/start" className="flex gap-2  justify-center py-10">
-            <img src={LogoTrans} className="w-6 h-6 select-none" alt="" />
+        <div className="z-30 flex w-full h-fit relative px-20 py-10">
+          <Link to="/start" className="flex gap-2  justify-center ">
+            <img src={LogoTrans} className="w-6 select-none" alt="" />
             <p className="text-white text-xl inter  font-bold select-none uppercase ">
               Inerti<span className="text-[#00CBFB] mx-1">.</span>
               <span className="text-transparent inter  font-bold bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] uppercase">
@@ -37,15 +37,15 @@ const Login = () => {
         </div>
         {/* Login form */}
         <form
-          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-12 mb-16 "
+          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-12 mb-20 "
           onSubmit={handleSubmit()}
         >
           <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full sm:mb-12 gap-8 ">
             <div className="flex flex-col justify-center items-center gap-2 text-center px-6">
-              <p className="text-transparent inter text-4xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
+              <p className="text-transparent GreySansBlack text-4xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
                 welcome Back!
               </p>
-              <div className=" text-zinc-200 text-xs select-none">
+              <div className=" text-zinc-300 text-xs select-none">
                 Login to access your account and explore the latest updates and
                 features.
               </div>
@@ -135,7 +135,7 @@ const Login = () => {
               >
                 Log In
               </button>
-              <div className="flex gap-2 text-white text-sm select-none">
+              <div className="flex gap-2 text-gray-400 text-sm select-none">
                 Don't have an account.{" "}
                 <p className="inter font-bold position-relative cursor-pointer">
                   <Link
