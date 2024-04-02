@@ -19,6 +19,10 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onLogin =(data)=>{
+    console.log(data)
+  }
   return (
     <>
       {/* login page main div */}
@@ -38,7 +42,7 @@ const Login = () => {
         {/* Login form */}
         <form
           className="z-30 flex w-full h-full relative left-0 justify-start items-center px-12 mb-20 "
-          onSubmit={handleSubmit()}
+          onSubmit={handleSubmit(onLogin)}
         >
           <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full sm:mb-12 gap-8 ">
             <div className="flex flex-col justify-center items-center gap-2 text-center px-6">
