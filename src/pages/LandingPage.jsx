@@ -60,12 +60,12 @@ const LandingPage = () => {
           </div>
           {/* Action buttons */}
           <div className="flex gap-5 items-center">
-            <button
+            <Link to="/login"
               title="Login"
               className="group select-none px-5 py-3 text-white glowingBtn rounded-xl text-xs uppercase font-bold tracking-widest "
             >
               <i className="text-white ri-star-fill transition-all"></i> Motion
-            </button>
+            </Link>
             <button
               title="Made in india"
               className="flex gap-2 bg-[#010101] justify-center items-center select-none px-5 py-3 text-white border-2 border-gray-600 rounded-xl text-xs uppercase font-bold tracking-widest "
