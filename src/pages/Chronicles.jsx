@@ -23,6 +23,7 @@ import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -231,10 +232,14 @@ const Chronicles = () => {
       </style>
       <div className="chronicles h-auto w-full bg-[#010101] flex flex-col p-5">
         {/* header */}
-        <div className="w-full h-10">
+        <div className="w-full h-10 flex justify-between">
           <p className="StretchPro text-white uppercase flex items-center select-none  ">
             DOOPE
           </p>
+          <Link to="/start" title="Home" className="cursor-pointer   text-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+</svg>
+</Link>  
         </div>
         {/* Body */}
         <div className="w-full h-full mt-10 flex flex-col gap-20">
@@ -441,7 +446,6 @@ const Chronicles = () => {
 
 // 3d canvas component
 const Canvas3d = () => {
-  const grpref = useRef(null);
   return (
     <>
       <Canvas>
