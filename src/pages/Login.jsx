@@ -24,8 +24,8 @@ const Login = () => {
       {/* login page main div */}
       <div className="flex flex-col bg-black w-full h-full overflow-hidden relative">
         {/* header */}
-        <div className="z-30 flex w-full h-fit relative px-20 py-10">
-          <Link to="/start" className="flex gap-2  justify-center ">
+        <div className="z-30 flex w-full h-auto relative px-20">
+          <Link to="/start" className="flex gap-2  justify-center items-center py-10">
             <img src={LogoTrans} className="w-6 select-none" alt="" />
             <p className="text-white text-xl inter  font-bold select-none uppercase ">
               Inerti<span className="text-[#00CBFB] mx-1">.</span>
@@ -43,7 +43,7 @@ const Login = () => {
           <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full sm:mb-12 gap-8 ">
             <div className="flex flex-col justify-center items-center gap-2 text-center px-6">
               <p className="text-transparent GreySansBlack text-4xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
-                welcome Back!
+                welcome Back
               </p>
               <div className=" text-zinc-300 text-xs select-none">
                 Login to access your account and explore the latest updates and
