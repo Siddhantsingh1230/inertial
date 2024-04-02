@@ -11,9 +11,19 @@ const Chronicles = () => {
         {/* Body */}
         <div className="w-full h-full mt-10">
           {/* title */}
-          <h1 className=" select-none text-7xl text-white w-full text-center GreySansBlack uppercase ">
-            A<span className="Mojita text-9xl ">R</span>Ti<span className="Mojita text-9xl "></span>sts
-          </h1>
+          <div className="w-full flex justify-center items-center">
+            <div className="relative select-none text-5xl w-fit text-white  text-center GreySansBlack uppercase flex  items-center">
+              <span className="GreySansBlack uppercase">ART</span>
+              <div className="relative group cursor-pointer">
+                {/* Badge */}
+                <p className="absolute -top-5 left-[0.15rem] overflow-hidden  text-[0.6rem] text-black  rounded-full text-center bg-white transition-all duration-500 group-hover:bg-[#FF5F1F] w-1 h-1 p-2 group-hover:w-16  group-hover:h-[1rem] group-hover:-translate-y-3 group-hover:-translate-x-1/2 group-hover:left-1/2 group-hover:py-1 pointer-events-none">
+                  <span className="group-hover:visible invisible UnisonBold">CRAFT</span>
+                </p>
+                <div className="w-3 bg-white h-8 mx-1"></div>
+              </div>
+              <span className="GreySansBlack uppercase">STS</span>
+            </div>
+          </div>
         </div>
       </div>
     </>
