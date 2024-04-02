@@ -17,7 +17,7 @@ const Chronicles = () => {
               <div className="relative  cursor-pointer">
                 {/* Badge */}
                 <p className="absolute -top-5 left-[0.15rem] overflow-hidden  text-[0.6rem] text-black  rounded-full text-center bg-white transition-all duration-500 group-hover:bg-[#FF5F1F] w-1 h-1 p-2 group-hover:w-20  group-hover:h-[1.2rem] group-hover:-translate-y-3 group-hover:-translate-x-1/2 group-hover:left-1/2 group-hover:py-[0.35rem] pointer-events-none ">
-                  <span className="group-hover:visible invisible UnisonBold tracking-widest">CRAFT</span>
+                  <span className="group-hover:opacity-100 opacity-0 ransition-all duration-300 UnisonBold tracking-widest">CRAFT</span>
                 </p>
                 <div className="w-3 bg-white h-8 mx-1 transition-all duration-500 group-hover:translate-y-[0.15rem]  group-hover:rounded-md"></div>
               </div>
