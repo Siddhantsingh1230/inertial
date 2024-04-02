@@ -165,21 +165,21 @@ html {
   top: 0;
   left: 0;
   height: 60%;
-  width: 100%;  
+  width: 100%;
   background: linear-gradient(to bottom, #010101 3%, transparent 97%);
 }
 
-.downFade::after{
+.downFade::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   height: 30%;
-  width: 100%;  
+  width: 100%;
   background: linear-gradient(to top, #010101 1%, transparent 97%);
 }
 
-.skew{
+.skew {
   transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
 }
 
@@ -192,3 +192,50 @@ html {
   background: #000000;
 }
 
+
+.login-skew {
+  transform: perspective(1000px) rotateY(-15deg) rotateX(15deg); /* Apply the skew effect */
+}
+
+.login-skew-items {
+  animation: animated-grid 20s linear infinite;
+}
+
+@keyframes animated-grid {
+  0% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-40%);
+  }
+  100% {
+    transform: translateY(20);
+  }
+}
+
+.signInBtn {
+  position: relative;
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  background-size: 150%;
+}
+
+.signInBtn:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f35bb1, #03a9f4);
+  background-size: 200%;
+  border-radius: 16px;
+  opacity: 0;
+  transition: 2s;
+}
+
+.signInBtn:hover:before {
+  filter: blur(5px);
+  opacity: 1;
+  animation: glowingBtnAnimate 8s linear infinite;
+}
