@@ -39,6 +39,10 @@ html {
   font-family: Mojita;
   src: url("./assets/fonts/Mojita.ttf");
 }
+@font-face {
+  font-family: StretchPro;
+  src: url("./assets/fonts/StretchPro.otf");
+}
 
 .GreySansBlack {
   font-family: GreySansBlack;
@@ -52,7 +56,9 @@ html {
 .Mojita {
   font-family: Mojita;
 }
-
+.StretchPro{
+  font-family: StretchPro;
+}
 .inter {
   font-family: "Inter", sans-serif;
 }
@@ -183,16 +189,6 @@ html {
   transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
 }
 
-.o-stretch{
-  display: inline-block;
-  border-radius: 1rem;
-  height: calc(1rem - 2px);
-  width: 2rem;
-  border:4px solid rgb(255, 255, 255) ;
-  background: #000000;
-}
-
-
 .login-skew {
   transform: perspective(1000px) rotateY(-15deg) rotateX(15deg); /* Apply the skew effect */
 }
@@ -238,4 +234,10 @@ html {
   filter: blur(5px);
   opacity: 1;
   animation: glowingBtnAnimate 8s linear infinite;
+}
+
+.gridBg{
+  background-image:url(./assets/images/gridsvg.svg);
+  background-repeat: repeat;
+  background-position: center center;
 }

@@ -13,11 +13,101 @@ import p12 from "../assets/images/p12.jpg";
 import p13 from "../assets/images/p13.jpg";
 import p14 from "../assets/images/p14.jpg";
 
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Suspense, useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Environment, OrbitControls } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useControls } from "leva";
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
+
 const Chronicles = () => {
+  const cursor = useRef(null);
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    if (isActive) {
+      cursor.current.style.scale = 2.5;
+    } else {
+      cursor.current.style.scale = 1;
+    }
+  }, [isActive]);
+  const cursormove = (e) => {
+    cursor.current.style.left = e.clientX - 20 + "px";
+    cursor.current.style.top = e.clientY - 5 + "px";
+  };
+  useEffect(() => {
+    window.addEventListener("mousemove", cursormove);
+    return () => {
+      window.removeEventListener("mousemove", cursormove);
+    };
+  }, []);
+  const split = useRef();
+  const tl = useRef();
+  useGSAP(
+    () => {
+      tl.current = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: split.current,
+            // markers: true,
+            start: "52% 50%",
+            end: "150% 50%",
+            scrub: 2,
+            pin: true,
+          },
+        })
+        .to(
+          ".center",
+          {
+            height: "100%",
+          },
+          "a"
+        )
+        .to(
+          ".top",
+          {
+            top: "-100%",
+          },
+          "a"
+        )
+        .to(
+          ".bottom",
+          {
+            bottom: "-100%",
+          },
+          "a"
+        )
+        .to(
+          ".top h1",
+          {
+            top: "120%",
+          },
+          "a"
+        )
+        .to(
+          ".bottom h1",
+          {
+            bottom: "90%",
+          },
+          "a"
+        );
+    },
+    { scope: split }
+  );
   return (
     <>
       <style>
         {`
+        body{
+          background:#010101;
+        }
         .circle{
           transition:border-radius  ease 0.45s;
           border-radius:50%;
@@ -25,37 +115,27 @@ const Chronicles = () => {
         .circle:hover{
           border-radius:0;
         }
-        /* Custom Scrollbar */
-        chronicles::-webkit-scrollbar {
-          width: var(--sb-size);
-        }
-        
-        chronicles::-webkit-scrollbar-track {
-          background: var(--sb-track-color);
-          border-radius: 26px;
-        }
-        
-        chronicles::-webkit-scrollbar-thumb {
-          background: var(--sb-thumb-color);
-          border-radius: 26px;
-        }
-        
-        @supports not selector(::-webkit-scrollbar) {
-          chronicles {
-              scrollbar-color: var(--sb-thumb-color)
-                             var(--sb-track-color);
-          }
-        }
         .cursor{
           mix-blend-mode:difference;
+          transition:scale ease 0.45s;
         }
+        .downarrow{
+          position: absolute;
+          animation:fadedown 2s ease-in-out infinite;
+        }
+        @keyframes fadedown {
+          0%   { transform:translate(-50%,-20px); opacity: 0;  }
+          50%  { opacity: 1;  }
+          100% { transform:translate(-50%,20px); opacity: 0; }
+        }
+        
       `}
       </style>
-      <div className="chronicles h-full w-full bg-[#010101] flex flex-col overflow-hidden p-5">
+      <div className="chronicles h-auto w-full bg-[#010101] flex flex-col p-5">
         {/* header */}
         <div className="w-full h-10">
-          <p className="UnisonBold text-white uppercase flex items-center select-none  ">
-            D<span className="o-stretch"></span>PE
+          <p className="StretchPro text-white uppercase flex items-center select-none  ">
+            DOOPE
           </p>
         </div>
         {/* Body */}
@@ -169,7 +249,7 @@ const Chronicles = () => {
           </div>
 
           {/* Footer text */}
-          <div className="w-full flex justify-center items-center flex-col select-none">
+          <div className="w-full flex justify-center items-center flex-col select-none mb-10">
             <hr className="w-[25%] border-t-2  border-gray-500 rounded-xl mb-10" />
             <p className="text-gray-400 text-xs font-bold UnisonBold uppercase">
               WE Create Web Designs
@@ -177,11 +257,136 @@ const Chronicles = () => {
             <p className="text-gray-400 text-xs font-bold UnisonBold upepcase">
               WE Create ART
             </p>
+            <a href="#split" className="mt-5 relative">
+              <i className="ri-arrow-down-wide-line text-4xl downarrow text-gray-300  cursor-pointer"></i>
+            </a>
           </div>
         </div>
-        {/* cursor */}
-        <div className="fixed -bottom-10 cursor w-10 h-10 transition-transform ease-in pointer-events-none rounded-full bg-white"></div>
       </div>
+      {/* Div Split */}
+      <div
+        ref={split}
+        id="split"
+        className="split w-full h-screen bg-[#010101] relative overflow-hidden"
+      >
+        {/* top div */}
+        <div className="select-none z-20 top w-full h-1/2  bg-[#010101]  absolute top-0  overflow-hidden">
+          <h1 className="text-white UnisonBold absolute text-9xl left-1/2 -translate-x-1/2 -translate-y-1/2 top-full ">
+            CREATIVE
+          </h1>
+        </div>
+        {/* center div */}
+        <div className="z-10 center cursor-none w-full h-full top-0 left-0  text-white absolute overflow-hidden">
+          <div className="w-full h-full gridBg py-10 items-center flex flex-col  relative">
+            {/* title */}
+            <h1
+              onMouseOver={() => {
+                setIsActive(true);
+              }}
+              onMouseLeave={() => {
+                setIsActive(false);
+              }}
+              className="text-3xl relative z-40 uppercase select-none StretchPro  text-white"
+            >
+              DDesigns
+            </h1>
+            <div className="text-3xl relative z-40 select-none text-white flex justify-center items-center mt-2 gap-3">
+              <span
+                onMouseOver={() => {
+                  setIsActive(true);
+                }}
+                onMouseLeave={() => {
+                  setIsActive(false);
+                }}
+                className="StretchPro uppercase"
+              >
+                That SpPeaks
+              </span>{" "}
+              <span
+                onMouseOver={() => {
+                  setIsActive(true);
+                }}
+                onMouseLeave={() => {
+                  setIsActive(false);
+                }}
+                className="py-1 px-3 StretchPro  text-xs border-[1.65px] rounded-full"
+              >
+                True Art
+              </span>
+            </div>
+            {/* canvas */}
+            <div className="w-full h-full absolute z-30">
+              <Canvas3d />
+            </div>
+          </div>
+
+          {/* cursor */}
+          <div
+            ref={cursor}
+            className="fixed -bottom-10 z-50 cursor w-10 h-10 ease-in pointer-events-none rounded-full bg-white"
+          ></div>
+        </div>
+        {/* Bottom div */}
+        <div className="select-none z-20 bottom bg-[#010101] w-full h-1/2  absolute bottom-0 overflow-hidden">
+          <h1 className="text-white UnisonBold absolute text-9xl left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+            CREATIVE
+          </h1>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// 3d canvas component
+const Canvas3d = () => {
+  const grpref = useRef(null);
+  return (
+    <>
+      <Canvas>
+        <Suspense fallback={null}>
+          <Model />
+          <directionalLight intensity={2} position={[0, 2, 3]} />
+          <Environment preset="city" />
+        </Suspense>
+      </Canvas>
+    </>
+  );
+};
+
+const Model = () => {
+  const { nodes } = useGLTF("/models/torrus.glb");
+  const torus = useRef(null);
+  console.log(nodes);
+  useFrame(() => {
+    torus.current.rotation.x += 0.02;
+    torus.current.rotation.y += 0.0042;
+  });
+
+  const materialProps = {
+    thickness: 0.2,
+    roughness: 0,
+    transmission: 1,
+    ior: 1.2,
+    chromaticAberration: 0.02,
+    backside: true,
+  };
+  return (
+    <>
+      <group scale={4}>
+        <Text
+          font={"/Public_Fonts/StretchPro.otf"}
+          position={[0, 0, -1]}
+          fontSize={0.5}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+        >
+          DISCOVER
+        </Text>
+        <mesh ref={torus} {...nodes.Torus002}>
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      </group>
     </>
   );
 };

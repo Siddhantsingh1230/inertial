@@ -8,3 +8,7 @@ git checkout dev
 ```
 Start working
 
+
+```
+Follow Up Dependecies: npm i three @react-three/fiber @react-three/drei  @gsap/react 
+```
