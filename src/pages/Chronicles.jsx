@@ -16,8 +16,8 @@ const Chronicles = () => {
               <span className="GreySansBlack uppercase">ART</span>
               <div className="relative group cursor-pointer">
                 {/* Badge */}
-                <p className="absolute -top-5 left-[0.15rem] overflow-hidden  text-[0.6rem] text-black  rounded-full text-center bg-white transition-all duration-500 group-hover:bg-[#FF5F1F] w-1 h-1 p-2 group-hover:w-16  group-hover:h-[1rem] group-hover:-translate-y-3 group-hover:-translate-x-1/2 group-hover:left-1/2 group-hover:py-1 pointer-events-none">
-                  <span className="group-hover:visible invisible UnisonBold">CRAFT</span>
+                <p className="absolute -top-5 left-[0.15rem] overflow-hidden  text-[0.6rem] text-black  rounded-full text-center bg-white transition-all duration-500 group-hover:bg-[#FF5F1F] w-1 h-1 p-2 group-hover:w-20  group-hover:h-[1.2rem] group-hover:-translate-y-3 group-hover:-translate-x-1/2 group-hover:left-1/2 group-hover:py-[0.35rem] pointer-events-none">
+                  <span className="group-hover:visible invisible UnisonBold tracking-widest">CRAFT</span>
                 </p>
                 <div className="w-3 bg-white h-8 mx-1"></div>
               </div>
