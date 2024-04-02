@@ -20,10 +20,9 @@ import { Suspense, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useControls } from "leva";
+import { useFrame } from "@react-three/fiber";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -42,9 +41,108 @@ const Chronicles = () => {
     cursor.current.style.left = e.clientX - 20 + "px";
     cursor.current.style.top = e.clientY - 5 + "px";
   };
+  const textRef1 = useRef(null);
+  const textRef2 = useRef(null);
+  const hackedTextEffect = (textRef) => {
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function getRandomLetter() {
+      var alphabet = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+      ];
+      return alphabet[rand(0, alphabet.length - 1)];
+    }
+    function getRandomWord(word) {
+      var text = word.innerHTML;
+
+      var finalWord = "";
+      for (var i = 0; i < text.length; i++) {
+        finalWord += text[i] == " " ? " " : getRandomLetter();
+      }
+
+      return finalWord;
+    }
+
+    var word = textRef.current;
+    var interv = "undefined";
+    var canChange = false;
+    var globalCount = 0;
+    var count = 0;
+    var INITIAL_WORD = word.innerHTML;
+    var isGoing = false;
+
+    function init() {
+      if (isGoing) return;
+
+      isGoing = true;
+      var randomWord = getRandomWord(word);
+      word.innerHTML = randomWord;
+
+      interv = setInterval(function () {
+        var finalWord = "";
+        for (var x = 0; x < INITIAL_WORD.length; x++) {
+          if (x <= count && canChange) {
+            finalWord += INITIAL_WORD[x];
+          } else {
+            finalWord += getRandomLetter();
+          }
+        }
+        word.innerHTML = finalWord;
+        if (canChange) {
+          count++;
+        }
+        if (globalCount >= 20) {
+          canChange = true;
+        }
+        if (count >= INITIAL_WORD.length) {
+          clearInterval(interv);
+          count = 0;
+          canChange = false;
+          globalCount = 0;
+          isGoing = false;
+        }
+        globalCount++;
+      }, 50);
+    }
+
+    init();
+  };
+  const applyHackedTextFx = () => {
+    hackedTextEffect(textRef1);
+    hackedTextEffect(textRef2);
+  };
   useEffect(() => {
     window.addEventListener("mousemove", cursormove);
+    window.addEventListener("load", applyHackedTextFx);
+
     return () => {
+      window.removeEventListener("load", applyHackedTextFx);
       window.removeEventListener("mousemove", cursormove);
     };
   }, []);
@@ -143,7 +241,9 @@ const Chronicles = () => {
           {/* title */}
           <div className="w-full flex justify-center items-center">
             <div className="relative select-none text-5xl w-fit text-white  text-center GreySansBlack uppercase flex  items-center group cursor-pointer">
-              <span className="GreySansBlack uppercase">ART</span>
+              <span ref={textRef1} className="StretchPro uppercase">
+                ART
+              </span>
               <div className="relative  cursor-pointer">
                 {/* Badge */}
                 <p className="absolute -top-5 left-[0.15rem] overflow-hidden  text-[0.6rem] text-black  rounded-full text-center bg-white transition-all duration-500 group-hover:bg-[#FF5F1F] w-1 h-1 p-2 group-hover:w-20  group-hover:h-[1.2rem] group-hover:-translate-y-3 group-hover:-translate-x-1/2 group-hover:left-1/2 group-hover:py-[0.35rem] pointer-events-none ">
@@ -153,7 +253,9 @@ const Chronicles = () => {
                 </p>
                 <div className="w-3 bg-white h-8 mx-1 transition-all duration-500 group-hover:translate-y-[0.15rem]  group-hover:rounded-md"></div>
               </div>
-              <span className="GreySansBlack uppercase">STS</span>
+              <span ref={textRef2} className="StretchPro uppercase">
+                STS
+              </span>
             </div>
           </div>
           {/* Avtars */}
@@ -356,7 +458,7 @@ const Canvas3d = () => {
 const Model = () => {
   const { nodes } = useGLTF("/models/torrus.glb");
   const torus = useRef(null);
-  console.log(nodes);
+  // console.log(nodes);
   useFrame(() => {
     torus.current.rotation.x += 0.02;
     torus.current.rotation.y += 0.0042;
