@@ -20,7 +20,7 @@ import { Suspense, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Link } from "react-router-dom";
@@ -236,10 +236,26 @@ const Chronicles = () => {
           <p className="StretchPro text-white uppercase flex items-center select-none  ">
             DOOPE
           </p>
-          <Link to="/start" title="Home" className="cursor-pointer   text-white"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-</svg>
-</Link>  
+          <Link
+            to="/start"
+            title="Home"
+            className="cursor-pointer   text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 9h16.5m-16.5 6.75h16.5"
+              />
+            </svg>
+          </Link>
         </div>
         {/* Body */}
         <div className="w-full h-full mt-10 flex flex-col gap-20">
@@ -416,7 +432,7 @@ const Chronicles = () => {
                 onMouseLeave={() => {
                   setIsActive(false);
                 }}
-                className="py-1 px-3 StretchPro  text-xs border-[1.65px] rounded-full"
+                className="py-1 px-3 StretchPro font-thin leading-[1rem] text-[0.65rem] border-[1.65px] rounded-full"
               >
                 True Art
               </span>
@@ -460,36 +476,42 @@ const Canvas3d = () => {
 };
 
 const Model = () => {
-  const { nodes } = useGLTF("/models/torrus.glb");
-  const torus = useRef(null);
-  // console.log(nodes);
+  const { nodes } = useGLTF("/models/cubereg.glb");
+  const object = useRef(null);
+  console.log(nodes);
   useFrame(() => {
-    torus.current.rotation.x += 0.02;
-    torus.current.rotation.y += 0.0042;
+    object.current.geometry.center();
+
+    // Translate object to center
+    object.current.position.set(0, 0, 0);
+    object.current.position.z = -17;
+    object.current.rotation.x += 0.002;
+    object.current.rotation.y += 0.0032;
+    object.current.rotation.z -= 0.0062;
   });
 
   const materialProps = {
-    thickness: 0.2,
+    thickness: 0.52,
     roughness: 0,
     transmission: 1,
     ior: 1.2,
-    chromaticAberration: 0.02,
+    chromaticAberration: 1.2,
     backside: true,
   };
   return (
     <>
       <group scale={4}>
-        <Text
-          font={"/Public_Fonts/StretchPro.otf"}
-          position={[0, 0, -1]}
-          fontSize={0.5}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          DISCOVER
-        </Text>
-        <mesh ref={torus} {...nodes.Torus002}>
+          <Text
+            font={"/Public_Fonts/StretchPro.otf"}
+            position={[0, 0, -1]}
+            fontSize={0.5}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+          >
+            DISCOVER
+          </Text>
+        <mesh ref={object} {...nodes.Object_3}>
           <MeshTransmissionMaterial {...materialProps} />
         </mesh>
       </group>
