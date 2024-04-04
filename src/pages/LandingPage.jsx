@@ -91,7 +91,7 @@ const LandingPage = () => {
             </p>
             <p className="uppercase GreySansBlack text-white text-6xl  flex mx-[5rem]">
               <span className="GreySans text-2xl  mr-2">And</span>
-              <span className="GreySansBlack">collect</span>
+              <span className="GreySansBlack">connect</span>
             </p>
             <p className="uppercase GreySansBlack text-white text-6xl mx-3 flex justify-center items-center gap-2 relative linearFade w-fit">
               <span className="h-[70%] w-[8px]  rounded-md  inline-block  bg-[#DE26F6] mr-2"></span>
