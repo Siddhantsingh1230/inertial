@@ -20,7 +20,7 @@ import { Suspense, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF, Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Link } from "react-router-dom";
@@ -157,7 +157,7 @@ const Chronicles = () => {
             trigger: split.current,
             // markers: true,
             start: "52% 50%",
-            end: "150% 50%",
+            end: "120% 50%",
             scrub: 2,
             pin: true,
           },
@@ -227,7 +227,14 @@ const Chronicles = () => {
           50%  { opacity: 1;  }
           100% { transform:translate(-50%,20px); opacity: 0; }
         }
-        
+        .outline{
+          color: #000;
+          text-shadow:
+            1px 1px 0 #fff,
+            -1px 1px 0 #fff,
+            -1px -1px 0 #fff,
+            1px -1px 0 #fff;
+        }
       `}
       </style>
       <div className="chronicles h-auto w-full bg-[#010101] flex flex-col p-5">
@@ -399,7 +406,7 @@ const Chronicles = () => {
           </h1>
         </div>
         {/* center div */}
-        <div className="z-10 center cursor-none w-full h-full top-0 left-0  text-white absolute overflow-hidden">
+        <div className="z-10 center  w-full h-full top-0 left-0  text-white absolute overflow-hidden">
           <div className="w-full h-full gridBg py-10 items-center flex flex-col  relative">
             {/* title */}
             <h1
@@ -409,7 +416,7 @@ const Chronicles = () => {
               onMouseLeave={() => {
                 setIsActive(false);
               }}
-              className="text-3xl relative z-40 uppercase select-none StretchPro  text-white"
+              className=" text-3xl relative z-40 uppercase select-none StretchPro  text-white"
             >
               DDesigns
             </h1>
@@ -440,6 +447,18 @@ const Chronicles = () => {
             {/* canvas */}
             <div className="w-full h-full absolute z-30">
               <Canvas3d />
+            </div>
+            <div className="w-full h-full absolute transparent -bottom-10 left-0">
+              <div className="w-full absolute bottom-12 flex justify-center items-center">
+                <hr className="w-[45%] invisible" />
+                <Link to="/login" className="z-30 text-sm leading-1 border-2 border-gray-400 cursor-pointer select-none text-gray-300 uppercase py-2 px-4 GreySansBlack rounded-md">
+                  Explore Now
+                </Link>
+                <hr className="w-[25%] relative z-20" />
+                <p className="text-9xl relative z-10 -translate-x-1 StretchPro outline text-center">
+                  O7
+                </p>
+              </div>
             </div>
           </div>
 
@@ -487,7 +506,7 @@ const Model = () => {
     // object.current.position.z = -17;
     object.current.rotation.x += 0.002;
     object.current.rotation.y += 0.0032;
-    object.current.rotation.z -= 0.0062;  
+    object.current.rotation.z -= 0.0062;
   });
 
   const materialProps = {
@@ -501,16 +520,16 @@ const Model = () => {
   return (
     <>
       <group scale={4}>
-          <Text
-            font={"/Public_Fonts/StretchPro.otf"}
-            position={[0, 0, -1]}
-            fontSize={0.5}
-            color="white"
-            anchorX="center"
-            anchorY="middle"
-          >
-            DISCOVER
-          </Text>
+        <Text
+          font={"/Public_Fonts/StretchPro.otf"}
+          position={[0, 0, -1]}
+          fontSize={0.5}
+          color="white"
+          anchorX="center"
+          anchorY="middle"
+        >
+          DISCOVER
+        </Text>
         <mesh ref={object} {...nodes.Torus002}>
           <MeshTransmissionMaterial {...materialProps} />
         </mesh>
