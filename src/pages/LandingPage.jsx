@@ -53,10 +53,10 @@ const LandingPage = () => {
             <p className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500">
               Features
             </p>
-            <p className="group text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500 relative">
+            <Link to="/contact" className="group text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500 relative">
               Contact{" "}
               <i className="absolute group-hover:-translate-y-1  transition-all duration-300  ri-arrow-right-up-line"></i>
-            </p>
+            </Link>
           </div>
           {/* Action buttons */}
           <div className="flex gap-5 items-center">
