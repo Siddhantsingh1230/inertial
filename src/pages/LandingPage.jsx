@@ -55,7 +55,7 @@ const LandingPage = () => {
             </p>
             <p className="group text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500 relative">
               Contact{" "}
-              <i className="absolute group-hover:-translate-y-1  transition-all duration-100  ri-arrow-right-up-line"></i>
+              <i className="absolute group-hover:-translate-y-1  transition-all duration-300  ri-arrow-right-up-line"></i>
             </p>
           </div>
           {/* Action buttons */}

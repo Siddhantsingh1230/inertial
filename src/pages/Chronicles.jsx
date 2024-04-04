@@ -207,6 +207,9 @@ const Chronicles = () => {
         body{
           background:#010101;
         }
+        body::-webkit-scrollbar {
+          display: none;
+        }
         .circle{
           transition:border-radius  ease 0.45s;
           border-radius:50%;
