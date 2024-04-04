@@ -451,11 +451,28 @@ const Chronicles = () => {
             <div className="w-full h-full absolute transparent -bottom-10 left-0">
               <div className="w-full absolute bottom-12 flex justify-center items-center">
                 <hr className="w-[45%] invisible" />
-                <Link to="/login" className="z-30 text-sm leading-1 border-2 border-gray-400 cursor-pointer select-none text-gray-300 uppercase py-2 px-4 GreySansBlack rounded-md">
+                <Link
+                  onMouseOver={() => {
+                    setIsActive(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsActive(false);
+                  }}
+                  to="/login"
+                  className="z-30 text-sm leading-1 border-2 border-gray-400 cursor-pointer select-none text-gray-300 uppercase py-2 px-4 GreySansBlack rounded-md"
+                >
                   Explore Now
                 </Link>
-                <hr className="w-[25%] relative z-20" />
-                <p className="text-9xl relative z-10 -translate-x-1 StretchPro outline text-center">
+                <hr className="w-[25%] relative z-40" />
+                <p
+                  onMouseOver={() => {
+                    setIsActive(true);
+                  }}
+                  onMouseLeave={() => {
+                    setIsActive(false);
+                  }}
+                  className="text-9xl relative z-30 cursor-none -translate-x-1 StretchPro outline text-center"
+                >
                   O7
                 </p>
               </div>
@@ -537,5 +554,4 @@ const Model = () => {
     </>
   );
 };
-
 export default Chronicles;
