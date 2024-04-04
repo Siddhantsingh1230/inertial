@@ -56,7 +56,7 @@ html {
 .Mojita {
   font-family: Mojita;
 }
-.StretchPro{
+.StretchPro {
   font-family: StretchPro;
 }
 .inter {
@@ -236,8 +236,8 @@ html {
   animation: glowingBtnAnimate 8s linear infinite;
 }
 
-.gridBg{
-  background-image:url(./assets/images/gridsvg.svg);
+.gridBg {
+  background-image: url(./assets/images/gridsvg.svg);
   background-repeat: repeat;
   background-position: center center;
 }

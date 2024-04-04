@@ -55,7 +55,7 @@ const Login = () => {
               </div>
             </div>
             <div className="flex flex-col w-full gap-3">
-              {/* username div */}
+              {/* email div */}
               <div className="flex flex-col gap-2">
                 <input
                   autoComplete="email"
@@ -73,7 +73,7 @@ const Login = () => {
                   className="rounded-xl p-3 px-4 text-sm bg-zinc-900 text-gray-100 outline-none hover:bg-zinc-800"
                 />
                 {errors.email && (
-                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-semibold text-red-700 select-none">
+                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-[10px] font-semibold text-red-700 select-none">
                     {errors.email.message}
                   </p>
                 )}
@@ -118,7 +118,7 @@ const Login = () => {
                   ></i>
                 </label>
                 {errors.password && (
-                  <p className="inline-flex items-center rounded-md select-none px-2 py-0 text-xs font-semibold text-red-700 ">
+                  <p className="inline-flex items-center rounded-md select-none px-2 py-0 text-[10px] font-semibold text-red-700 ">
                     {errors.password.message}
                   </p>
                 )}
