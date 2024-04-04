@@ -476,26 +476,26 @@ const Canvas3d = () => {
 };
 
 const Model = () => {
-  const { nodes } = useGLTF("/models/cubereg.glb");
+  const { nodes } = useGLTF("/models/torrus.glb");
   const object = useRef(null);
-  console.log(nodes);
+  // console.log(nodes);
   useFrame(() => {
-    object.current.geometry.center();
+    // object.current.geometry.center();
 
-    // Translate object to center
-    object.current.position.set(0, 0, 0);
-    object.current.position.z = -17;
+    // // Translate object to center
+    // object.current.position.set(0, 0, 0);
+    // object.current.position.z = -17;
     object.current.rotation.x += 0.002;
     object.current.rotation.y += 0.0032;
-    object.current.rotation.z -= 0.0062;
+    object.current.rotation.z -= 0.0062;  
   });
 
   const materialProps = {
-    thickness: 0.52,
+    thickness: 0.2,
     roughness: 0,
     transmission: 1,
     ior: 1.2,
-    chromaticAberration: 1.2,
+    chromaticAberration: 0.04,
     backside: true,
   };
   return (
@@ -511,7 +511,7 @@ const Model = () => {
           >
             DISCOVER
           </Text>
-        <mesh ref={object} {...nodes.Object_3}>
+        <mesh ref={object} {...nodes.Torus002}>
           <MeshTransmissionMaterial {...materialProps} />
         </mesh>
       </group>
