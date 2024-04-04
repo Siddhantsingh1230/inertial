@@ -463,7 +463,7 @@ const Chronicles = () => {
                 >
                   Explore Now
                 </Link>
-                <hr className="w-[25%] relative z-40" />
+                <hr className="w-[30%] relative z-40" />
                 <p
                   onMouseOver={() => {
                     setIsActive(true);
@@ -471,7 +471,7 @@ const Chronicles = () => {
                   onMouseLeave={() => {
                     setIsActive(false);
                   }}
-                  className="text-9xl relative z-30 cursor-none -translate-x-1 StretchPro outline text-center"
+                  className="text-7xl relative z-30 cursor-none -translate-x-1 StretchPro outline text-center"
                 >
                   O7
                 </p>
