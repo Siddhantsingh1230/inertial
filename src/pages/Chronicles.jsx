@@ -58,9 +58,9 @@ const Chronicles = () => {
           scrollTrigger: {
             trigger: split.current,
             // markers: true,
-            start: "52% 50%",
-            end: "120% 50%",
-            scrub: 2,
+            start: "50% 50%",
+            end: "100% 50%",
+            scrub: 3,
             pin: true,
           },
         })
