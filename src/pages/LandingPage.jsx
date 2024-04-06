@@ -263,7 +263,7 @@ const LandingPage = () => {
             </p>
             <p
               className={`uppercase GreySansBlack text-white text-6xl max-sm:text-4xl sm:mx-3 flex  justify-center items-center gap-2 relative ${
-                isMobileMode ? "linearFadeR" : "linearFade "
+                mobileMode ? "linearFadeR" : "linearFade "
               } w-fit max-sm:flex-row-reverse`}
             >
               <span className="h-[70%] w-[8px] max-sm:hidden rounded-md  inline-block  bg-[#DE26F6] mr-2"></span>
