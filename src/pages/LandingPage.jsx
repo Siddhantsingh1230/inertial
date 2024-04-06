@@ -22,15 +22,43 @@ import art15 from "../assets/images/art15.jpg";
 import art16 from "../assets/images/art16.jpg";
 import art17 from "../assets/images/art17.jpg";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 const LandingPage = () => {
+  const container = useRef();
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      tl.from(".navUi", { y: -100, stagger: 0.2 });
+      tl.from(".main", {
+        x: "-100%",
+        stagger: 0.15,
+        ease:"power1.inOut"
+      });
+      tl.from(".imgGrid img", {
+        scale: 0,
+        x: "100%",
+        y:"100%",
+        duration: 0.25,
+        stagger: -0.1,
+        ease: "power3.out",
+      });
+    },
+    { scope: container }
+  );
+
   return (
     <>
-      <div className="h-full w-full bg-[#010101] flex justify-center items-center flex-col overflow-hidden relative">
+      <div
+        ref={container}
+        className="h-full w-full bg-[#010101] flex justify-center items-center flex-col overflow-hidden relative"
+      >
         {/* Landing header */}
         <div className="relative z-30 w-full h-auto  px-20 flex justify-between items-center">
           {/* icon/Logo/text */}
-          <div className="flex gap-2  justify-center items-center py-10">
+          <div className="navUi flex gap-2  justify-center items-center py-10">
             <img src={LogoTrans} className="w-6  " alt="" />
             <p className="text-white text-xl inter  font-bold select-none uppercase ">
               Inerti<span className="text-[#00CBFB] mx-1">.</span>
@@ -40,27 +68,31 @@ const LandingPage = () => {
             </p>
           </div>
           {/* Links */}
-          <div className="flex gap-10 select-none  h-full justify-center items-center">
+          <div className="navUi flex gap-10 select-none  h-full justify-center items-center">
             <p className="text-sm text-white cursor-pointer h-full relative topOverline flex justify-center items-center px-3">
               Explore
             </p>
             <Link
               to="/chronicles"
-              className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500"
+              className="text-sm hover:text-white transition-color duration-200 cursor-pointer text-gray-500"
             >
               Chronicles
             </Link>
-            <p className="text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500">
+            <p className=" text-sm hover:text-white transition-color duration-200 cursor-pointer text-gray-500">
               Features
             </p>
-            <Link to="/contact" className="group text-sm hover:text-white trabsition-color duration-200 cursor-pointer text-gray-500 relative">
+            <Link
+              to="/contact"
+              className="group text-sm hover:text-white transition-color duration-200 cursor-pointer text-gray-500 relative"
+            >
               Contact{" "}
               <i className="absolute group-hover:-translate-y-1  transition-all duration-300  ri-arrow-right-up-line"></i>
             </Link>
           </div>
           {/* Action buttons */}
-          <div className="flex gap-5 items-center">
-            <Link to="/login"
+          <div className="navUi flex gap-5 items-center">
+            <Link
+              to="/login"
               title="Login"
               className="group select-none px-5 py-3 text-white glowingBtn rounded-xl text-xs uppercase font-bold tracking-widest "
             >
@@ -78,7 +110,7 @@ const LandingPage = () => {
         {/* landing Body */}
         <div className="relative z-30 w-full h-full flex flex-col mt-24 select-none">
           {/* Heading */}
-          <div className="w-full flex flex-col px-20 ">
+          <div className="main w-full flex flex-col px-20 ">
             <p className="uppercas GreySansBlack text-white text-6xl">
               DISCOVER
             </p>
@@ -109,7 +141,7 @@ const LandingPage = () => {
             </p>
           </div>
           {/* avtars */}
-          <div className="w-auto items-center flex mt-10 px-20">
+          <div className="main w-auto items-center flex mt-10 px-20">
             {/* images */}
             <div className="relative  flex w-auto items-center">
               <div className="rounded-full relative bg-[#010101] w-16 h-16 flex justify-center items-center">
@@ -160,11 +192,11 @@ const LandingPage = () => {
             </div>
           </div>
           {/* divider */}
-          <div className="mx-20 w-96 flex p-5 items-center relative horizontalLinearfade">
+          <div className="main mx-20 w-96 flex p-5 items-center relative horizontalLinearfade">
             <hr className="w-96  border-t-2 border-white  " />
           </div>
           {/* Statistics */}
-          <div className="w-full flex px-20 mt-5 items-center">
+          <div className="main w-full flex px-20 mt-5 items-center">
             <div className="flex w-auto flex-col relative justify-center items-center">
               <p className="text-white text-2xl relative  GreySansBlack ">
                 40K+
@@ -201,7 +233,7 @@ const LandingPage = () => {
         </div>
 
         {/* 3d image grid*/}
-        <div className="z-10 skew swarmFade w-full h-full flex gap-5 absolute top-0 left-0 py-5">
+        <div className="imgGrid z-10 skew swarmFade w-full h-full flex gap-5 absolute top-0 left-0 py-5">
           <div className="flex flex-col gap-5 h-full w-[40%] overflow-hidden">
             <div className="w-full">
               <img
@@ -253,7 +285,7 @@ const LandingPage = () => {
                 alt=""
               />
             </div>
-            <div className="flex w-full gap-5 z-50 bg-gray-600 rounded-xl ">
+            <div className="flex w-full gap-5 z-50  rounded-xl ">
               <img
                 className="rounded-xl object-cover w-full h-96"
                 src={art11}

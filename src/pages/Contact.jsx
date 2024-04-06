@@ -4,9 +4,21 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Contact = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const container = useRef();
+  useGSAP(
+    () => {
+      gsap.from(".main", {
+        opacity: 0,
+        duration: 2,
+      });
+    },
+    { scope: container }
+  );
   return (
     <>
       <style>
@@ -20,9 +32,12 @@ const Contact = () => {
         }
         `}
       </style>
-      <div className="bg-[#010101] w-full h-auto flex xl:flex-row sm:flex-col-reverse max-sm:flex-col-reverse overflow-y-auto">
+      <div
+        ref={container}
+        className="bg-[#010101] w-full h-auto flex xl:flex-row sm:flex-col-reverse max-sm:flex-col-reverse overflow-y-auto main"
+      >
         {/* Contact form */}
-        <div className="w-full sm:h-auto xl:overflow-hidden xl:h-screen flex select-none flex-col justify-center px-28 max-sm:px-5 max-sm:pb-10">
+        <div className="main w-[80%] sm:h-auto xl:overflow-hidden xl:h-screen flex select-none flex-col justify-center px-28 max-sm:px-5 max-sm:w-full max-sm:pb-10">
           <h1 className="uppercase StretchPro  max-sm:text-3xl max-sm:text-center text-4xl text-white mb-10">
             Coontact Us
           </h1>
@@ -66,19 +81,22 @@ const Contact = () => {
               rows={"8"}
               className="text-white bg-transparent border-2 resize-none border-gray-700 rounded-md py-5 px-4"
             />
-            <button className="rounded-md uppercase StretchPro mt-5 px-5 py-2 text-sm bg-white text-black hover:bg-gray-900 hover:text-white transition-color duration-200">
+            <button className="rounded-md uppercase StretchPro mt-5 px-5 py-2 text-sm bg-white text-black hover:bg-gray-300  transition-color duration-200">
               Submit
             </button>
           </form>
         </div>
         {/* 3d canvas */}
-        <div className="w-full sm:h-[30rem] max-sm:h-[15rem] overflow-hidden xl:h-screen  flex justify-end">
+        <div className="main w-full sm:h-[30rem] max-sm:h-[15rem] overflow-hidden xl:h-screen  flex justify-end">
           <div className="w-full h-full">
             <Canvas3d />
           </div>
         </div>
         {/* Back button */}
-        <i onClick={() => navigate(-1)} className="ri-arrow-left-line text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-10 left-10 cursor-pointer "></i>
+        <i
+          onClick={() => navigate(-1)}
+          className="ri-arrow-left-line text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-10 left-10 cursor-pointer "
+        ></i>
       </div>
     </>
   );
@@ -101,7 +119,7 @@ const Canvas3d = () => {
 const Model = () => {
   const { nodes } = useGLTF("/models/torrus.glb");
   const object = useRef(null);
-//   console.log(nodes);
+  //   console.log(nodes);
   useFrame(() => {
     // object.current.geometry.center();
 

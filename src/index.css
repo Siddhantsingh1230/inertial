@@ -163,7 +163,8 @@ html {
   left: 0;
   height: 100%;
   width: 100%;
-  background: linear-gradient(to right, #010101 40%, transparent 60%);
+  background: linear-gradient(to right, #010101 27%, transparent 60%);
+  z-index: 10;
 }
 .swarmFade::after {
   content: "";
@@ -173,6 +174,7 @@ html {
   height: 60%;
   width: 100%;
   background: linear-gradient(to bottom, #010101 3%, transparent 97%);
+  z-index: 10;
 }
 
 .downFade::after {
