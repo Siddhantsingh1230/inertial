@@ -95,7 +95,7 @@ const Contact = () => {
         {/* Back button */}
         <i
           onClick={() => navigate(-1)}
-          className="ri-arrow-left-line text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-10 left-10 cursor-pointer "
+          className="ri-arrow-left-line text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-10 left-10 max-sm:left-5 max-sm:top-5 cursor-pointer "
         ></i>
       </div>
     </>

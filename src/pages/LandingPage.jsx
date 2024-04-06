@@ -28,11 +28,14 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
 
 const LandingPage = () => {
   // Mobile viewport
   let isMobileMode = false;
   const [mobileMode, setMobileMode] = useState(false);
+  const [mobileDrawer, setMobileDrawer] = useState(false);
   const container = useRef();
   useGSAP(
     () => {
@@ -69,9 +72,9 @@ const LandingPage = () => {
         });
         gsap.from(".mobileLogin", {
           opacity: 0,
-          scale:0,
-          duration:0.1,
-          ease:"power2.out",
+          scale: 0,
+          duration: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".mobileLogin",
             // markers: true,
@@ -155,6 +158,14 @@ const LandingPage = () => {
             z-index: 50;
             background: linear-gradient(to top, #010101 1%, transparent 95%);
           }
+          .insetBorderL::before{
+            content:"";
+            border-left:3px solid rgb(168 85 247);
+            position:absolute;
+            top:0;
+            height:100%;
+            left:0;
+          }
       `}
       </style>
       <div
@@ -179,7 +190,7 @@ const LandingPage = () => {
           </div>
           {/* Links */}
           <div className="navUi flex xl:gap-10 sm:gap-2 select-none  h-full justify-center items-center  max-sm:hidden">
-            <p className="text-sm text-white cursor-pointer h-full relative topOverline flex justify-center items-center px-3">
+            <p className="text-sm text-white cursor-pointer xl:h-full sm:h-28  relative topOverline flex justify-center items-center px-3">
               Explore
             </p>
             <Link
@@ -217,7 +228,10 @@ const LandingPage = () => {
             </button>
           </div>
           {/* mobile menu icon */}
-          <div className="header h-[60%] p-1 sm:hidden flex justify-center items-center cursor-pointer">
+          <div
+            onClick={() => setMobileDrawer(true)}
+            className="header h-[60%] p-1 sm:hidden flex justify-center items-center cursor-pointer"
+          >
             <i className="ri-menu-3-line text-white text-xl max-sm:text-lg"></i>
           </div>
         </div>
@@ -474,6 +488,96 @@ const LandingPage = () => {
         </div>
         <div className="z-10 downFade w-full h-full  absolute top-0 left-0"></div>
       </div>
+
+      {/* Drawer */}
+      <Drawer
+        open={mobileDrawer}
+        onClose={() => setMobileDrawer(false)}
+        direction="right"
+        size="75vw"
+        className="sm:hidden xl:hidden"
+        lockBackgroundScroll={true}
+      >
+        {/* title and buttons */}
+        <div
+          className={`select-none w-full flex flex-col h-full bg-black transition-all`}
+        >
+          {/* Header */}
+          <div className="w-full flex justify-between items-center p-5">
+            <img src={LogoTrans} className="w-4 object-cover" alt="" />
+            <i
+              onClick={() => setMobileDrawer(false)}
+              className="text-gray-400 hover:text-white transition-all duration-300 text-xl ri-close-line"
+            ></i>
+          </div>
+          {/* Body */}
+          <div className="w-full h-full mb-10 flex flex-col justify-between px-2">
+            <div className="w-full flex flex-col">
+              <div className="insetBorderL text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center relative">
+                <p>Explore</p>
+                <i className="ri-function-fill text-lg text-purple-500"></i>
+              </div>
+              <Link
+                to="/chronicles"
+                className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
+              >
+                <p>Chronicles</p>
+                <i className="ri-key-2-fill text-lg text-green-500"></i>
+              </Link>
+              <Link
+                to="/features"
+                className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
+              >
+                <p>Features</p>
+                <i className="ri-blaze-fill text-lg text-orange-500"></i>
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
+              >
+                <p>Contact</p>
+                <i className="ri-flashlight-fill text-lg text-yellow-500"></i>
+              </Link>
+            </div>
+            {/* Tags */}
+            <div className="w-full flex flex-wrap  mt-20 gap-2">
+              <div className="w-8 h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-sm">
+                #
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+                design
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3E3DF3] text-black GreySans text-xs  px-2 ">
+                digital
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-orange-600 text-black GreySans text-xs  px-2 ">
+                interface
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white  text-black GreySans text-xs  px-2 ">
+                animation
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+                graphic
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3E3DF3] text-black GreySans text-xs  px-2 ">
+                UI/UX
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-xs  px-2 ">
+                <i className="ri-heart-3-fill text-lg"></i>
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-orange-600 text-black GreySans text-xs  px-2 ">
+                web
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+                site
+              </div>
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-xs  px-2 ">
+                <i className="ri-arrow-down-line text-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Drawer>
     </>
   );
 };

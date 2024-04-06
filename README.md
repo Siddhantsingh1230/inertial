@@ -10,5 +10,5 @@ Start working
 
 
 ```
-Follow Up Dependecies: npm i three @react-three/fiber @react-three/drei  @gsap/react 
+Follow Up Dependecies: npm i react-modern-drawer 
 ```
