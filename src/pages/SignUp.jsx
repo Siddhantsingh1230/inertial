@@ -49,11 +49,12 @@ const SignUp = () => {
       `}
       </style>
       <div className="flex h-full w-full bg-black relative">
+        {/* signup form */}
         <form
-          className="flex w-full h-full absolute left-0 justify-end items-center px-28"
+          className="flex w-full h-full absolute left-0 justify-end items-center px-28 max-xl:px-8 max-sm:px-6"
           onSubmit={handleSubmit(onSignup)}
         >
-          <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full gap-8 ">
+          <div className="flex flex-col xl:w-[30%] max-xl:w-[35%] max-lg:w-[35%] max-md:w-[50%] max-sm:w-full gap-8 ">
             <div className="flex flex-col justify-center items-center gap-1 text-center">
               <p className="text-transparent GreySansBlack text-5xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
                 Join us
@@ -197,16 +198,17 @@ const SignUp = () => {
             </div>
           </div>
         </form>
-        <div className="flex w-[70%] top-0 left-0 justify-start overflow-hidden">
-          <div className="flex flex-col h-screen w-full gap-[26px] overflow-hidden select-none">
+        {/* triangular image grid */}
+        <div className="flex w-[70%] max-md:w-[60%] max-sm:hidden top-0 left-0 justify-start overflow-hidden">
+          <div className="flex flex-col h-screen w-full gap-[26px] max-2xl:gap-[13px] max-xl:gap-[8px] max-lg:gap-[16px] max-md:gap-[8px] overflow-hidden select-none">
             <div className="flex h-1/3 w-full px-[55px] overflow-hidden">
-              <div className="flex w-full reverse-triangular-img-card">
+              <div className="flex w-full max-md:hidden reverse-triangular-img-card">
                 <img
                   src={s12}
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full triangular-img-card">
+              <div className="flex w-full  triangular-img-card">
                 <img
                   src={s2}
                   className="triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
@@ -218,35 +220,35 @@ const SignUp = () => {
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full triangular-img-card">
+              <div className="flex w-full max-lg:hidden triangular-img-card">
                 <img
                   src={s9}
                   className="triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full reverse-triangular-img-card">
+              <div className="flex w-full max-lg:hidden reverse-triangular-img-card">
                 <img
                   src={s5}
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full triangular-img-card"></div>
+              <div className="flex w-full  triangular-img-card"></div>
             </div>
             <div className="flex h-1/3 w-full px-[55px] overflow-hidden ">
-              <div className="flex w-full triangular-img-card"></div>
+              <div className="flex w-full max-md:hidden triangular-img-card"></div>
               <div className="flex w-full reverse-triangular-img-card">
                 <img
                   src={s6}
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full triangular-img-card">
+              <div className="flex w-full max-lg:hidden triangular-img-card">
                 <img
                   src={s7}
                   className="triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full reverse-triangular-img-card">
+              <div className="flex w-full max-lg:hidden reverse-triangular-img-card">
                 <img
                   src={s8}
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
@@ -256,7 +258,7 @@ const SignUp = () => {
               <div className="flex w-full reverse-triangular-img-card"></div>
             </div>
             <div className="flex h-1/3 w-full px-[55px] overflow-hidden">
-              <div className="flex w-full reverse-triangular-img-card"></div>
+              <div className="flex w-full max-md:hidden reverse-triangular-img-card"></div>
               <div className="flex w-full triangular-img-card"></div>
               <div className="flex w-full reverse-triangular-img-card">
                 <img
@@ -270,13 +272,13 @@ const SignUp = () => {
                   className="triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full reverse-triangular-img-card">
+              <div className="flex w-full max-lg:hidden reverse-triangular-img-card">
                 <img
                   src={s11}
                   className="reverse-triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
                 />
               </div>
-              <div className="flex w-full triangular-img-card">
+              <div className="flex w-full max-lg:hidden triangular-img-card">
                 <img
                   src={s4}
                   className="triangular-img w-full h-full object-cover hover:scale-110 transition-all  duration-500"
@@ -286,7 +288,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <div className="flex top-[51%] left-[51%] absolute">
+      <div className="flex top-[51%] left-[51%] max-sm:hidden max-lg:left-[43%] max-md:left-[30%] absolute">
         <Link
           to="/start"
           title="Inertial"

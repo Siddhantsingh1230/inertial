@@ -28,7 +28,7 @@ const Login = () => {
       {/* login page main div */}
       <div className="flex flex-col bg-black w-full h-full overflow-hidden relative">
         {/* header */}
-        <div className="z-30 flex w-full h-auto relative px-20 max-sm:px-6">
+        <div className="z-30 flex w-full h-auto relative xl:px-20 sm:px-5 max-sm:px-6">
           <Link
             to="/start"
             className="flex gap-2  justify-center items-center py-10 max-sm:py-6"
@@ -48,12 +48,12 @@ const Login = () => {
         </div>
         {/* Login form */}
         <form
-          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-8 sm:px-12 sm:mb-20 "
+          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-6 sm:px-12 sm:mb-20 "
           onSubmit={handleSubmit(onLogin)}
         >
-          <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full sm:mb-12 gap-8 ">
-            <div className="flex flex-col justify-center items-center gap-2 text-center sm:px-6">
-              <p className="text-transparent GreySansBlack text-4xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
+          <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-[65%] max-sm:w-full sm:mb-12 gap-8 ">
+            <div className="flex flex-col justify-center items-center gap-2 text-center 2xl:px-6">
+              <p className="text-transparent GreySansBlack text-4xl max-sm:text-3xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
                 welcome Back
               </p>
               <div className=" text-zinc-300 text-xs select-none">
@@ -161,7 +161,7 @@ const Login = () => {
           </div>
         </form>
         {/* bg image grid */}
-        <div className="flex w-full top-0 left-0 sm:px-24 overflow-hidden max-md:hidden justify-end absolute">
+        <div className="flex w-full top-0 left-0 sm:px-14 md:px-24 overflow-hidden max-sm:hidden justify-end absolute">
           <div className="login-skew flex w-[70%] max-xl:w-full gap-8">
             <div className="flex flex-col w-full gap-8 mt-10 mb-2 login-skew-items">
               <div className="w-full">
