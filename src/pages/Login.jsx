@@ -20,18 +20,25 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onLogin =(data)=>{
-    console.log(data)
-  }
+  const onLogin = (data) => {
+    console.log(data);
+  };
   return (
     <>
       {/* login page main div */}
       <div className="flex flex-col bg-black w-full h-full overflow-hidden relative">
         {/* header */}
-        <div className="z-30 flex w-full h-auto relative px-20">
-          <Link to="/start" className="flex gap-2  justify-center items-center py-10">
-            <img src={LogoTrans} className="w-6 select-none" alt="" />
-            <p className="text-white text-xl inter  font-bold select-none uppercase ">
+        <div className="z-30 flex w-full h-auto relative px-20 max-sm:px-6">
+          <Link
+            to="/start"
+            className="flex gap-2  justify-center items-center py-10 max-sm:py-6"
+          >
+            <img
+              src={LogoTrans}
+              className="w-6 max-sm:w-5 select-none"
+              alt=""
+            />
+            <p className="text-white sm:text-xl text-md inter  font-bold select-none uppercase ">
               Inerti<span className="text-[#00CBFB] mx-1">.</span>
               <span className="text-transparent inter  font-bold bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] uppercase">
                 al
@@ -41,11 +48,11 @@ const Login = () => {
         </div>
         {/* Login form */}
         <form
-          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-12 mb-20 "
+          className="z-30 flex w-full h-full relative left-0 justify-start items-center px-8 sm:px-12 sm:mb-20 "
           onSubmit={handleSubmit(onLogin)}
         >
           <div className="flex flex-col xl:w-[30%] max-xl:w-[40%] max-lg:w-[60%] max-md:w-full sm:mb-12 gap-8 ">
-            <div className="flex flex-col justify-center items-center gap-2 text-center px-6">
+            <div className="flex flex-col justify-center items-center gap-2 text-center sm:px-6">
               <p className="text-transparent GreySansBlack text-4xl font-bold bg-clip-text bg-gradient-to-r from-[#35cce7]  to-[#d865e8] uppercase select-none">
                 welcome Back
               </p>
