@@ -30,6 +30,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Chronicles = () => {
   const cursor = useRef(null);
+  const [mobileMode, setMobileMode] = useState(false);
   const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     if (isActive) {
@@ -102,6 +103,29 @@ const Chronicles = () => {
     },
     { scope: split }
   );
+  // Handling viewport variables
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if viewport width is less than or equal to 768px (you can adjust this threshold as needed)
+
+      if (window.innerWidth <= 768) {
+        setMobileMode(true);
+      } else {
+        setMobileMode(false);
+      }
+    };
+
+    // Initial call to handleResize to set initial state
+    handleResize();
+
+    // Event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Empty dependency array to run effect when component is loaded for the first time
   return (
     <>
       <style>
@@ -170,7 +194,7 @@ const Chronicles = () => {
           </Link>
         </div>
         {/* Body */}
-        <div className="w-full h-full mt-10 flex flex-col gap-20">
+        <div className="w-full h-full sm:mt-10 max-sm:mt-5 flex flex-col sm:gap-20 max-sm:gap-10">
           {/* title */}
           <div className="w-full flex justify-center items-center">
             <div className="relative select-none text-5xl w-fit text-white  text-center GreySansBlack uppercase flex  items-center group cursor-pointer">
@@ -188,7 +212,7 @@ const Chronicles = () => {
             </div>
           </div>
           {/* Avtars */}
-          <div className="w-full relative h-auto flex overflow-hidden overflow-x-auto ">
+          <div className="w-full relative h-auto flex overflow-hidden overflow-x-auto max-sm:hidden sm:hidden md:flex">
             <div className="h-[16rem] absolute -left-[8rem] w-[16rem] ">
               <img
                 src={p1}
@@ -278,10 +302,33 @@ const Chronicles = () => {
               />
             </div>
           </div>
+          {/* Mobile Avtars */}
+          <div className="w-full sm:hidden flex h-auto overflow-hidden gap-5 snap-mandatory snap-x overflow-x-auto">
+            <img
+              src={p1}
+              className="w-[20rem] snap-center mx-5 h-[20rem] rounded-full object-cover"
+              alt=""
+            />
+            <img
+              src={p2}
+              className="w-[20rem] snap-center mx-5 h-[20rem] rounded-full object-cover"
+              alt=""
+            />
+            <img
+              src={p3}
+              className="w-[20rem] snap-center mx-5 h-[20rem] rounded-full object-cover"
+              alt=""
+            />
+            <img
+              src={p4}
+              className="w-[20rem] snap-center mx-5 h-[20rem] rounded-full object-cover"
+              alt=""
+            />
+          </div>
 
           {/* Footer text */}
           <div className="w-full flex justify-center items-center flex-col select-none mb-10">
-            <hr className="w-[25%] border-t-2  border-gray-500 rounded-xl mb-10" />
+            <hr className="sm:w-[25%] max-sm:w-[70%] border-t-2  border-gray-500 rounded-xl mb-10" />
             <p className="text-gray-400 text-xs font-bold UnisonBold uppercase">
               WE Create Web Designs
             </p>
@@ -302,7 +349,7 @@ const Chronicles = () => {
       >
         {/* top div */}
         <div className="select-none z-20 top w-full h-1/2  bg-[#010101]  absolute top-0  overflow-hidden">
-          <h1 className="text-white UnisonBold absolute text-9xl left-1/2 -translate-x-1/2 -translate-y-1/2 top-full ">
+          <h1 className="text-white UnisonBold absolute sm:text-9xl max-sm:text-3xl left-1/2 -translate-x-1/2 -translate-y-1/2 top-full ">
             CREATIVE
           </h1>
         </div>
@@ -317,11 +364,11 @@ const Chronicles = () => {
               onMouseLeave={() => {
                 setIsActive(false);
               }}
-              className=" text-3xl relative z-40 uppercase select-none StretchPro  text-white"
+              className=" sm:text-3xl max-sm:text-xl  relative z-40 uppercase select-none StretchPro  text-white"
             >
               DDesigns
             </h1>
-            <div className="text-3xl relative z-40 select-none text-white flex justify-center items-center mt-2 gap-3">
+            <div className="sm:text-3xl max-sm:text-xl relative z-40 select-none text-white flex justify-center items-center mt-2 gap-3">
               <span
                 onMouseOver={() => {
                   setIsActive(true);
@@ -347,11 +394,11 @@ const Chronicles = () => {
             </div>
             {/* canvas */}
             <div className="w-full h-full absolute z-30">
-              <Canvas3d />
+              <Canvas3d mobileMode={mobileMode} />
             </div>
             <div className="w-full h-full absolute transparent -bottom-10 left-0">
               <div className="w-full absolute bottom-12 flex justify-center items-center">
-                <hr className="w-[45%] invisible" />
+                <hr className="w-[45%] invisible max-sm:hidden" />
                 <Link
                   onMouseOver={() => {
                     setIsActive(true);
@@ -360,7 +407,7 @@ const Chronicles = () => {
                     setIsActive(false);
                   }}
                   to="/login"
-                  className="z-30 text-sm leading-1 border-2 border-gray-400 cursor-pointer select-none text-gray-300 uppercase py-2 px-4 GreySansBlack rounded-md"
+                  className="z-30 text-sm leading-1 border-2 border-gray-400 cursor-pointer select-none text-gray-300 uppercase py-2 px-4  GreySansBlack rounded-md max-sm:text-xs"
                 >
                   Explore Now
                 </Link>
@@ -372,7 +419,7 @@ const Chronicles = () => {
                   onMouseLeave={() => {
                     setIsActive(false);
                   }}
-                  className="text-7xl relative z-30 cursor-none -translate-x-1 StretchPro outline text-center"
+                  className="sm:text-7xl max-sm:text-3xl relative z-30 cursor-none sm:-translate-x-1 StretchPro outline text-center"
                 >
                   O7
                 </p>
@@ -388,7 +435,7 @@ const Chronicles = () => {
         </div>
         {/* Bottom div */}
         <div className="select-none z-20 bottom bg-[#010101] w-full h-1/2  absolute bottom-0 overflow-hidden">
-          <h1 className="text-white UnisonBold absolute text-9xl left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+          <h1 className="text-white UnisonBold absolute sm:text-9xl max-sm:text-3xl left-1/2 -translate-x-1/2 -translate-y-1/2 ">
             CREATIVE
           </h1>
         </div>
@@ -398,12 +445,12 @@ const Chronicles = () => {
 };
 
 // 3d canvas component
-const Canvas3d = () => {
+const Canvas3d = ({ mobileMode }) => {
   return (
     <>
       <Canvas>
         <Suspense fallback={null}>
-          <Model />
+          <Model mobileMode={mobileMode} />
           <directionalLight intensity={2} position={[0, 2, 3]} />
           <Environment preset="city" />
         </Suspense>
@@ -412,16 +459,17 @@ const Canvas3d = () => {
   );
 };
 
-const Model = () => {
+const Model = ({ mobileMode }) => {
   const { nodes } = useGLTF("/models/torrus.glb");
   const object = useRef(null);
   // console.log(nodes);
   useFrame(() => {
-    // object.current.geometry.center();
-
-    // // Translate object to center
-    // object.current.position.set(0, 0, 0);
-    // object.current.position.z = -17;
+    if (mobileMode) {
+      object.current.geometry.center();
+      // // Translate object to center
+      object.current.position.set(0, 0, 0);
+      object.current.position.z = -1;
+    }
     object.current.rotation.x += 0.002;
     object.current.rotation.y += 0.0032;
     object.current.rotation.z -= 0.0062;
@@ -440,7 +488,7 @@ const Model = () => {
       <group scale={4}>
         <Text
           font={"/Public_Fonts/StretchPro.otf"}
-          position={[0, 0, -1]}
+          position={[0, 0, mobileMode ? -5 : -1]}
           fontSize={0.5}
           color="white"
           anchorX="center"
