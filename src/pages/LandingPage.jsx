@@ -30,6 +30,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   // Mobile viewport
@@ -73,7 +74,6 @@ const LandingPage = () => {
         tl.from(".mobileLogin", {
           x: "200%",
         });
-        
       }
     },
     { scope: container }
@@ -99,6 +99,7 @@ const LandingPage = () => {
     };
   }, []); // Empty dependency array to run effect when component is loaded for the first time
 
+  const navigate = useNavigate();
   return (
     <>
       <style>
@@ -487,7 +488,7 @@ const LandingPage = () => {
         direction="right"
         size="75vw"
         className="sm:hidden xl:hidden"
-        lockBackgroundScroll={true}
+        
       >
         {/* title and buttons */}
         <div
@@ -508,27 +509,36 @@ const LandingPage = () => {
                 <p>Explore</p>
                 <i className="ri-function-fill text-lg text-purple-500"></i>
               </div>
-              <Link
-                to="/chronicles"
+              <div
+                onClick={() => {
+                  setMobileDrawer(false);
+                  navigate("/chronicles");
+                }}
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Chronicles</p>
                 <i className="ri-key-2-fill text-lg text-green-500"></i>
-              </Link>
-              <Link
-                to="/features"
+              </div>
+              <div
+                onClick={() => {
+                  setMobileDrawer(false);
+                  navigate("/features");
+                }}
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Features</p>
                 <i className="ri-blaze-fill text-lg text-orange-500"></i>
-              </Link>
-              <Link
-                to="/contact"
+              </div>
+              <div
+                onClick={() => {
+                  setMobileDrawer(false);
+                  navigate("/contact");
+                }}
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Contact</p>
                 <i className="ri-flashlight-fill text-lg text-yellow-500"></i>
-              </Link>
+              </div>
             </div>
             {/* Tags */}
             <div className="w-full flex flex-wrap  mt-20 gap-2">
