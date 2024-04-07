@@ -147,7 +147,7 @@ const Login = () => {
                 Log In
               </button>
               <div className="flex gap-2 text-gray-400 text-sm select-none">
-                Don't have an account.{" "}
+                Don't have an account ?{" "}
                 <p className="inter font-bold position-relative cursor-pointer">
                   <Link
                     to="/signup"
