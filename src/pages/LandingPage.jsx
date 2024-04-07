@@ -488,7 +488,6 @@ const LandingPage = () => {
         direction="right"
         size="75vw"
         className="sm:hidden xl:hidden"
-        
       >
         {/* title and buttons */}
         <div
@@ -507,7 +506,7 @@ const LandingPage = () => {
             <div className="w-full flex flex-col">
               <div className="insetBorderL text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center relative">
                 <p>Explore</p>
-                <i className="ri-function-fill text-lg text-purple-500"></i>
+                <i className="ri-function-fill text-2xl text-[#9C62E5]"></i>
               </div>
               <div
                 onClick={() => {
@@ -517,7 +516,7 @@ const LandingPage = () => {
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Chronicles</p>
-                <i className="ri-key-2-fill text-lg text-green-500"></i>
+                <i className="ri-key-2-fill text-2xl text-[#F353A9]"></i>
               </div>
               <div
                 onClick={() => {
@@ -527,7 +526,7 @@ const LandingPage = () => {
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Features</p>
-                <i className="ri-blaze-fill text-lg text-orange-500"></i>
+                <i className="ri-blaze-fill text-2xl text-[#3DB8FC]"></i>
               </div>
               <div
                 onClick={() => {
@@ -537,7 +536,7 @@ const LandingPage = () => {
                 className="text-white text-sm hover:bg-[#0c0c0c] rounded-md px-3 py-3 inter flex justify-between items-center"
               >
                 <p>Contact</p>
-                <i className="ri-flashlight-fill text-lg text-yellow-500"></i>
+                <i className="ri-flashlight-fill text-2xl text-[#84F7D5]"></i>
               </div>
             </div>
             {/* Tags */}
@@ -545,31 +544,31 @@ const LandingPage = () => {
               <div className="w-8 h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-sm">
                 #
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#0cf1ac] text-black GreySans text-xs  px-2 ">
                 design
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3E3DF3] text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#F353A9] text-black GreySans text-xs  px-2 ">
                 digital
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-orange-600 text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3DB8FC] text-black GreySans text-xs  px-2 ">
                 interface
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white  text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#9C62E5]  text-black GreySans text-xs  px-2 ">
                 animation
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#0cf1ac] text-black GreySans text-xs  px-2 ">
                 graphic
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3E3DF3] text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#F353A9] text-black GreySans text-xs  px-2 ">
                 UI/UX
               </div>
               <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-xs  px-2 ">
                 <i className="ri-heart-3-fill text-lg"></i>
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-orange-600 text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#3DB8FC] text-black GreySans text-xs  px-2 ">
                 web
               </div>
-              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#EFC806] text-black GreySans text-xs  px-2 ">
+              <div className="w-auto h-8 justify-center items-center flex rounded-full bg-[#0cf1ac] text-black GreySans text-xs  px-2 ">
                 site
               </div>
               <div className="w-auto h-8 justify-center items-center flex rounded-full bg-white text-black GreySans text-xs  px-2 ">
