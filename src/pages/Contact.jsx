@@ -46,7 +46,7 @@ const Contact = () => {
             {/* name */}
             <label
               htmlFor="name"
-              className="relative block overflow-hidden rounded-md border-2 border-gray-700 px-3 pt-3 shadow-sm focus-within:border-white focus-within:ring-1 focus-within:ring-white-600 mb-5"
+              className="relative block overflow-hidden rounded-md border-2 border-zinc-700 px-3 pt-3 shadow-sm focus-within:border-white focus-within:ring-1 focus-within:ring-white-600 mb-5"
             >
               <input
                 type="text"
@@ -55,14 +55,14 @@ const Contact = () => {
                 className="peer h-8 w-full border-none text-white bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
               />
 
-              <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
+              <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-zinc-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                 Name
               </span>
             </label>
             {/* Email */}
             <label
               htmlFor="email"
-              className="relative block overflow-hidden rounded-md border-2 border-gray-700 px-3 pt-3 shadow-sm focus-within:border-white focus-within:ring-1 focus-within:ring-white-600 mb-5"
+              className="relative block overflow-hidden rounded-md border-2 border-zinc-700 px-3 pt-3 shadow-sm focus-within:border-white focus-within:ring-1 focus-within:ring-white-600 mb-5"
             >
               <input
                 type="email"
@@ -71,7 +71,7 @@ const Contact = () => {
                 className="peer h-8 w-full text-white border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
               />
 
-              <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
+              <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-zinc-400 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                 Email
               </span>
             </label>
@@ -79,7 +79,7 @@ const Contact = () => {
             <textarea
               placeholder="Query"
               rows={"8"}
-              className="text-white bg-transparent border-2 resize-none border-gray-700 rounded-md py-5 px-4"
+              className="text-white bg-transparent border-2 resize-none border-zinc-700 rounded-md py-5 px-4"
             />
             <button className="rounded-md uppercase StretchPro mt-5 px-5 py-2 text-sm bg-white text-black hover:bg-gray-300  transition-color duration-200">
               Submit
