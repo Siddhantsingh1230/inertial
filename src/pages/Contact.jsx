@@ -3,9 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import LogoTrans from "../assets/images/Logotrans.png";
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Contact = () => {
       </style>
       <div
         ref={container}
-        className="bg-[#010101] w-full h-auto flex xl:flex-row sm:flex-col-reverse max-sm:flex-col-reverse overflow-y-auto main"
+        className="bg-[#010101] w-full h-auto flex xl:flex-row sm:flex-col-reverse max-sm:flex-col-reverse overflow-y-auto main "
       >
         {/* Contact form */}
         <div className="main w-[80%] sm:h-auto xl:overflow-hidden xl:h-screen flex select-none flex-col justify-center px-28 max-sm:px-5 max-sm:w-full max-sm:pb-10">
@@ -87,16 +88,24 @@ const Contact = () => {
           </form>
         </div>
         {/* 3d canvas */}
-        <div className="main w-full sm:h-[30rem] max-sm:h-[15rem] overflow-hidden xl:h-screen  flex justify-end">
+        <div className="main w-full max-sm:mt-5 sm:h-[30rem] max-sm:h-[15rem] overflow-hidden xl:h-screen  flex justify-end">
           <div className="w-full h-full">
             <Canvas3d />
           </div>
         </div>
         {/* Back button */}
-        <i
-          onClick={() => navigate(-1)}
-          className="ri-arrow-left-line text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-10 left-10 max-sm:left-5 max-sm:top-5 cursor-pointer "
-        ></i>
+        <Link
+          to="/start"
+          className="flex gap-2  justify-center items-center py-10 max-sm:py-6  text-gray-400 hover:text-white transition-color duration-300 text-xl absolute top-0 left-24 max-sm:left-5  cursor-pointer "
+        >
+          <img src={LogoTrans} className="w-6 max-sm:w-5 select-none" alt="" />
+          <p className="text-white sm:text-xl text-md inter  font-bold select-none uppercase ">
+            Inerti<span className="text-[#00CBFB] mx-1">.</span>
+            <span className="text-transparent inter  font-bold bg-clip-text bg-gradient-to-r from-[#00D6FD]  to-[#DE26F6] uppercase">
+              al
+            </span>
+          </p>
+        </Link>
       </div>
     </>
   );
