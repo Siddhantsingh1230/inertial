@@ -70,19 +70,10 @@ const LandingPage = () => {
           x: "-200%",
           stagger: 0.1,
         });
-        gsap.from(".mobileLogin", {
-          opacity: 0,
-          scale: 0,
-          duration: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".mobileLogin",
-            // markers: true,
-            scrub: 3,
-            start: "top bottom",
-            end: "bottom bottom",
-          },
+        tl.from(".mobileLogin", {
+          x: "200%",
         });
+        
       }
     },
     { scope: container }
@@ -359,9 +350,9 @@ const LandingPage = () => {
                 Frames
               </p>
             </div>
-            <div className="sm:mx-12 max-sm:mx-10 flex flex-col items-center h-[60%]">
+            <div className="sm:mx-12 max-sm:mx-10 flex flex-col items-center sm:h-[60%] ">
               <div className="h-1 w-1 rounded-full bg-gray-600"></div>
-              <div className="h-full bg-gray-800 w-[0.1rem]"></div>
+              <div className="sm:h-full max-sm:h-5 bg-gray-800 w-[0.1rem]"></div>
               <div className="h-1 w-1 rounded-full bg-gray-600"></div>
             </div>
             <div className="flex w-auto flex-col relative justify-center items-center">
@@ -372,7 +363,7 @@ const LandingPage = () => {
             </div>
             <div className="sm:mx-12 max-sm:mx-10 flex flex-col items-center h-[60%]">
               <div className="h-1 w-1 rounded-full bg-gray-600"></div>
-              <div className="h-full bg-gray-800 w-[0.1rem]"></div>
+              <div className="sm:h-full max-sm:h-5 bg-gray-800 w-[0.1rem]"></div>
               <div className="h-1 w-1 rounded-full bg-gray-600"></div>
             </div>
             <div className="flex w-auto flex-col relative justify-center items-center">
