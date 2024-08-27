@@ -25,6 +25,16 @@ const Login = () => {
   };
   return (
     <>
+    <style>
+      {`
+      input:-webkit-autofill,
+        input:-webkit-autofill:focus {
+            transition: background-color 600000s 0s, color 600000s 0s;
+        }
+        input[data-autocompleted] {
+            background-color: transparent !important;
+        }`}
+    </style>
       {/* login page main div */}
       <div className="flex flex-col bg-black w-full h-full overflow-hidden relative">
         {/* header */}

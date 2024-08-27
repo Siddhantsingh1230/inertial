@@ -46,6 +46,13 @@ const SignUp = () => {
             clip-path: polygon(50% 100%, 0 0, 100% 0);
             overflow:hidden;
           }
+        input:-webkit-autofill,
+        input:-webkit-autofill:focus {
+            transition: background-color 600000s 0s, color 600000s 0s;
+        }
+        input[data-autocompleted] {
+            background-color: transparent !important;
+        }
       `}
       </style>
       <div className="flex h-full w-full bg-black relative">
@@ -79,7 +86,7 @@ const SignUp = () => {
                   className="rounded-xl p-3 px-4 text-sm bg-zinc-900 text-gray-100 outline-none hover:bg-zinc-800"
                 />
                 {errors.username && (
-                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-[10px] font-semibold text-red-700 select-none">
+                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-[11px] text-red-700 select-none">
                     {errors.username.message}
                   </p>
                 )}
@@ -102,7 +109,7 @@ const SignUp = () => {
                   className="rounded-xl p-3 px-4 text-sm bg-zinc-900 text-gray-100 outline-none hover:bg-zinc-800"
                 />
                 {errors.email && (
-                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-[10px] font-semibold text-red-700 select-none">
+                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-[11px] text-red-700 select-none">
                     {errors.email.message}
                   </p>
                 )}
@@ -147,7 +154,7 @@ const SignUp = () => {
                   ></i>
                 </label>
                 {errors.password && (
-                  <p className="inline-flex items-center rounded-md select-none px-2 py-0 text-[10px] font-semibold text-red-700 ">
+                  <p className="inline-flex items-center rounded-md select-none px-2 text-[11px] text-red-700 ">
                     {errors.password.message}
                   </p>
                 )}
@@ -170,7 +177,7 @@ const SignUp = () => {
                   </p>
                 </div>
                 {errors.agreeTerms && (
-                  <p className="inline-flex items-center rounded-md select-none px-2 py-0 text-[10px] font-semibold text-red-700 ">
+                  <p className="inline-flex items-center rounded-md select-none px-2 py-0 text-[11px] text-red-700 ">
                     {errors.agreeTerms.message}
                   </p>
                 )}

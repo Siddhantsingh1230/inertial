@@ -43,7 +43,21 @@ html {
   font-family: StretchPro;
   src: url("./assets/fonts/StretchPro.otf");
 }
+@font-face {
+  font-family: AvenirRegular;
+  src: url("./assets/fonts/AvenirRegular.ttf");
+}
+@font-face {
+  font-family: AvenirBlack;
+  src: url("./assets/fonts/AvenirBlack.ttf");
+}
 
+.AvenirRegular {
+  font-family: AvenirRegular;
+}
+.AvenirBlack {
+  font-family: AvenirBlack;
+}
 .GreySansBlack {
   font-family: GreySansBlack;
 }

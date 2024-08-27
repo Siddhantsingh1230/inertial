@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import LandingPage from "../pages/LandingPage";
 import Chronicles from "../pages/Chronicles";
 import Contact from "../pages/Contact";
+import Test from "../pages/Test";
 
 const MainWrapper = () => {
   return (
@@ -30,6 +31,7 @@ const MainWrapper = () => {
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/forgotpassword" element={<ForgotPwd />} />
         <Route exact path="/resetpassword/:id/:token" element={<ResetPwd />} />
+        <Route exact path="/test" element={<Test />} />
         {/* This PageNotFound component should always be the last component in route order due to the use of "*" wildcard character */}
         <Route exact path="*" element={<PageNotFound />} />
       </Routes>
