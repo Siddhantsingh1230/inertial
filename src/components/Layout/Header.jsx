@@ -4,7 +4,7 @@ const Header = ({ user }) => {
 
   return (
     <>
-      <div className="flex w-full h-full  justify-between items-center">
+      <div className="flex w-full h-10 bg-[var(--dark-gray)] justify-between items-center">
         {/* section 1 */}
         <div className="flex h-full gap-8 items-center">
           <div className="flex bg-white w-10 h-10 rounded-full"></div>
