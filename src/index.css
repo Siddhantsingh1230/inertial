@@ -21,6 +21,14 @@ html {
   height: 100%;
 }
 
+/* here all colors are defined */
+:root {
+  --dark-gray : #1A1A1A;
+  --light-gray : #282828;
+  --text-box-color : #222222;
+  --icon-color : #DCDCDC;
+}
+
 /* Fonts */
 
 @font-face {
