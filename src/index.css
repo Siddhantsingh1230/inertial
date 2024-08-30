@@ -25,8 +25,14 @@ html {
 :root {
   --dark-gray : #1A1A1A;
   --light-gray : #282828;
+  --lighter-gray : #2F2E2E;
+  --hover-gray : #414141;
   --text-box-color : #222222;
-  --icon-color : #DCDCDC;
+  --dark-text : #fbf9f9 ;
+  --regular-text : #bbbbbb ;
+  --light-text : #888888 ;
+  --icon-color : #AFAFAF;
+  --light-icon-color : #797979;
 }
 
 /* Fonts */
@@ -59,7 +65,14 @@ html {
   font-family: AvenirBlack;
   src: url("./assets/fonts/AvenirBlack.ttf");
 }
+@font-face {
+  font-family: AvenirLight;
+  src: url("./assets/fonts/AvenirLight.ttf");
+}
 
+.AvenirLight{
+  font-family: AvenirLight;
+}
 .AvenirRegular {
   font-family: AvenirRegular;
 }

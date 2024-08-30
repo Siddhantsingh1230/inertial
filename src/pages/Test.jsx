@@ -1,4 +1,4 @@
-import Header from "../components/Layout/Header"
+import Header from "../Layout/Header"
 
 const Test = () => {
   return (

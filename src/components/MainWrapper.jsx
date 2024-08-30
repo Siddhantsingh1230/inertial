@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Master from "./Layout/Master";
+import Master from "../Layout/Master";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import ForgotPwd from "../pages/ForgotPwd";
