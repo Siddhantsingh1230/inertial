@@ -1,7 +1,6 @@
 import { useState } from "react";
 import bg from "../assets/images/bg2.jpg";
 import userImage from "../assets/images/login8.jfif";
-import { useEffect } from "react";
 import n1 from "../assets/images/art17.jpg";
 import n2 from "../assets/images/avtar4.jpg";
 import { textEllipsis } from "../utils/textFormatting";
@@ -30,8 +29,6 @@ const Home = () => {
   const [newsLetters, setNewsLetters] = useState([
     { id: 1, name: "Sk Letters", subscribers: 245543, thumbnail: n1 },
     { id: 2, name: "dev Letters", subscribers: 454366, thumbnail: n2 },
-    { id: 3, name: "Sk Letters", subscribers: 24363673, thumbnail: n1 },
-    { id: 4, name: "dev Letters", subscribers: 434666, thumbnail: n2 },
   ]);
 
   const [users, setUsers] = useState([
@@ -43,7 +40,12 @@ const Home = () => {
     { id: 6, name: "Juliet", img: u6 },
     { id: 7, name: "Stephen", img: u7 },
     { id: 1, name: "Amanda", img: u1 },
-    { id: 1, name: "Amanda", img: u1 },
+    { id: 2, name: "John", img: u2 },
+    { id: 3, name: "Andrew", img: u3 },
+    { id: 4, name: "Rosaline", img: u4 },
+    { id: 5, name: "Mudreh", img: u5 },
+    { id: 6, name: "Juliet", img: u6 },
+    { id: 7, name: "Stephen", img: u7 },
   ]);
 
   const [frames, setFrames] = useState([
@@ -128,11 +130,17 @@ const Home = () => {
     },
   ]);
 
+  const [commentInputSelected, setCommentInputSelected] = useState(
+    Array(frames.length).fill(false)
+  );
+  const [comment, setComment] = useState(Array(frames.length).fill(""));
+
+
   return (
     <>
-      <div className="w-full h-full flex gap-8 relative px-2">
+      <div className="w-full h-full flex">
         {/* section 1 */}
-        <div className="flex flex-col gap-5 w-[22.5%]">
+        <div className="flex flex-col gap-4 w-[20%] fixed">
           <ProfileCard />
           {/* skills section */}
           <div className="flex flex-col w-full gap-3 ">
@@ -149,7 +157,10 @@ const Home = () => {
                     title="tag"
                   >
                     <div className="flex gap-1 text-xs AvenirRegular text-[var(--regular-text)] ">
-                      <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">#</p><p>{textEllipsis(item, 10)}</p>
+                      <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">
+                        #
+                      </p>
+                      <p>{textEllipsis(item, 10)}</p>
                     </div>
                   </div>
                 ))}
@@ -164,14 +175,14 @@ const Home = () => {
               </p>
               <div className="flex gap-6 justify-center items-center">
                 <i
-                  className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-purple-500"
+                  className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-cyan-500"
                   title="search"
                 ></i>
                 <div
-                  className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-purple-500 group"
+                  className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-cyan-500 group"
                   title="Add"
                 >
-                  <i class="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-purple-500"></i>
+                  <i className="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-cyan-500"></i>
                 </div>
               </div>
             </div>
@@ -179,17 +190,26 @@ const Home = () => {
           </div>
         </div>
         {/* section 2 */}
-        <div className="flex flex-col w-[55%] relative gap-8">
+        <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
           <UserStories users={users} />
-          <Frames frames={frames} />
+          <Frames
+            frames={frames}
+            commentInputSelected={commentInputSelected}
+            setCommentInputSelected={setCommentInputSelected}
+            comment={comment}
+            setComment={setComment}
+          />
         </div>
         {/* section 3 */}
-        <div className="flex flex-col h-full w-[22.5%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4 py-5">
+        <div>
+          <div className="flex flex-col h-full left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4 py-5">
           <p className="text-lg AvenirRegular text-[var(--dark-text)]">
-            Active Discussions
+            Recent activity
           </p>
           <RecentActivity recentActivities={recentActivities} />
         </div>
+        </div>
+        
       </div>
     </>
   );
@@ -209,8 +229,8 @@ const ProfileCard = () => {
             <i className="ri-more-2-fill text-zinc-400  text-md"></i>
           </div>
         </div>
-        <div className="flex w-full justify-center">
-          <div className="flex bg-zinc-900 w-24 h-24 absolute -mt-10 rounded-2xl overflow-hidden p-1">
+        <div className="flex w-full justify-center cursor-pointer">
+          <div className="flex bg-zinc-900 hover:bg-zinc-800 w-24 h-24 absolute -mt-10 rounded-2xl overflow-hidden p-1 ">
             <img src={userImage} className="w-full h-full rounded-xl"></img>
           </div>
         </div>
@@ -239,7 +259,7 @@ const ProfileCard = () => {
             <p className="text-md text-[var(--dark-text)] AvenirRegular">
               John Wick
             </p>
-            <p className="text-xs text-[var(--light-text)] AvenirRegular">
+            <p className="text-xs text-[var(--light-text)] AvenirRegular hover:underline cursor-pointer ">
               @wickteam
             </p>
           </div>
@@ -249,11 +269,8 @@ const ProfileCard = () => {
           </p>
           <div className="flex flex-col gap-2 pt-1 ">
             <div className="flex w-full h-[0.1rem] bg-[var(--text-box-color)]"></div>
-            <div className="flex w-full bg-gradient-to-r from-[#41cfe8] to-[#d955ea] py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none signInBtn">
-              <p
-                className="text-sm text-white AvenirBlack"
-                title="Profile"
-              >
+            <div className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none">
+              <p className="text-sm text-white AvenirRegular" title="Profile">
                 My Profile
               </p>
             </div>
@@ -282,7 +299,7 @@ const NewsLetters = ({ newsLetters }) => {
                   {textEllipsis(item.name, 23)}
                 </p>
                 <div className="flex gap-2 items-center">
-                  <div className="flex w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
+                  <div className="flex w-1 h-1 bg-pink-500 rounded-full"></div>
                   <p className="flex AvenirRegular text-[var(--light-text)] text-xs">
                     {formatNumber(item.subscribers)} susbcribers
                   </p>
@@ -298,39 +315,48 @@ const NewsLetters = ({ newsLetters }) => {
 const UserStories = ({ users }) => {
   return (
     <>
-      <div className="flex gap-6 overflow-hidden relative items-center">
-        {users?.length > 0 &&
-          users.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col items-center gap-1 group cursor-pointer "
-            >
-              <div className="flex bg-gradient-to-r rounded-2xl overflow-hidden from-[#41cfe8] to-[#d955ea] p-[1.5px] group">
-              <div className="flex w-20 h-20 rounded-2xl overflow-hidden p-1.5 group-hover:p-0 bg-[var(--dark-gray)] transition-all duration-500">
-                <img
-                  src={item.img}
-                  className="w-full h-full object-cover rounded-lg"
-                />
+      <div className="flex ">
+        <div className="flex w-6 h-6 -left-2 top-7 bg-[var(--lighter-gray)] justify-center items-center  z-10 absolute rounded-full cursor-pointer">
+          <i className="ri-arrow-left-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500"></i>
+        </div>
+        <div className="flex gap-6 overflow-hidden relative items-center">
+          {users?.length > 0 &&
+            users.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center gap-1 group cursor-pointer "
+              >
+                <div className="flex w-20 h-20 rounded-2xl overflow-hidden p-0.5 border-2 border-[var(--lighter-gray)] hover:border-cyan-500 transition-all duration-500">
+                  <img
+                    src={item.img}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                </div>
+
+                <p className="text-sm AvenirRegular text-[var(--regular-text)] group-hover:text-[var(--dark-text)] ">
+                  {item.name}
+                </p>
               </div>
-              </div>
-              
-              <p className="text-sm AvenirRegular text-[var(--regular-text)] group-hover:text-[var(--dark-text)] ">
-                {item.name}
-              </p>
-            </div>
-          ))}
-        <div className="flex w-6 h-6 -right-2 top-7 bg-[var(--lighter-gray)] z-10 justify-center items-center absolute rounded-full">
-          <i className="ri-arrow-right-s-line text-xl text-[var(--icon-color)]"></i>
+            ))}
+        </div>
+        <div className="flex w-6 h-6 -right-2 top-7 bg-[var(--lighter-gray)] justify-center items-center z-10 absolute rounded-full cursor-pointer">
+          <i className="ri-arrow-right-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500"></i>
         </div>
       </div>
     </>
   );
 };
 
-const Frames = ({ frames }) => {
+const Frames = ({
+  frames,
+  commentInputSelected,
+  setCommentInputSelected,
+  comment,
+  setComment,
+}) => {
   return (
     <>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         {frames?.length > 0 &&
           frames.map((item, idx) => (
             <div
@@ -350,7 +376,7 @@ const Frames = ({ frames }) => {
                       {item.email}
                     </p>
                     <i
-                      class="ri-verified-badge-fill text-blue-400"
+                      className="ri-verified-badge-fill text-blue-400"
                       title="verified"
                     ></i>
                   </div>
@@ -358,8 +384,8 @@ const Frames = ({ frames }) => {
                     <p className="text-md AvenirRegular text-[var(--dark-text)]">
                       {item.username}
                     </p>
-                    <div className="w-1 h-1 bg-purple-500 rounded-full"></div>
-                    <p className="text-xs AvenirBlack bg-gradient-to-r from-[#41cfe8] to-[#d955ea] bg-clip-text text-transparent">
+                    <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
+                    <p className="text-xs AvenirRegular text-pink-400">
                       {getTimeDifference(item.postTime)}
                     </p>
                   </div>
@@ -383,16 +409,25 @@ const Frames = ({ frames }) => {
               <div className="flex justify-between items-center">
                 <div className="flex gap-6 items-center px-2">
                   <div className="flex items-center">
-                    <i class="ri-heart-line text-2xl bg-gradient-to-r from-[#41cfe8] to-[#d955ea] bg-clip-text text-transparent cursor-pointer" title="like"></i>
+                    <i
+                      className="ri-heart-line text-2xl text-[var(--light-icon-color)] cursor-pointer hover:text-cyan-500"
+                      title="like"
+                    ></i>
                   </div>
                   <div className="flex items-center">
-                    <i class="ri-chat-3-line text-2xl bg-gradient-to-r from-[#41cfe8] to-[#d955ea] bg-clip-text text-transparent cursor-pointer" title="comment"></i>
+                    <i
+                      className="ri-chat-3-line text-2xl text-[var(--light-icon-color)] cursor-pointer hover:text-cyan-500"
+                      title="comment"
+                    ></i>
                   </div>
                   <div className="flex items-center">
-                    <i class="ri-send-plane-line text-2xl pt-1 bg-gradient-to-r from-[#41cfe8] to-[#d955ea] bg-clip-text text-transparent cursor-pointer" title="share"></i>
+                    <i
+                      className="ri-send-plane-line text-2xl pt-1 text-[var(--light-icon-color)] cursor-pointer hover:text-cyan-500"
+                      title="share"
+                    ></i>
                   </div>
                 </div>
-                <div className="flex text-xs AvenirBlack p-1.5 px-4 bg-gradient-to-r from-[#41cfe8] to-[#d955ea] rounded-lg glowingBtn">
+                <div className="flex text-xs text-white AvenirRegular p-1.5 px-4 bg-cyan-600 hover:bg-cyan-500 transition-all duration-500 rounded-xl cursor-pointer">
                   Subscribe
                 </div>
               </div>
@@ -406,13 +441,49 @@ const Frames = ({ frames }) => {
                     src={userImage}
                   />
                 </div>
-                <div className="flex w-full p-[1px] rounded-xl overflow-hidden bg-gradient-to-r from-[#41cfe8] to-[#d955ea]">
-                  <div className="flex w-full bg-[var(--light-gray)] rounded-xl px-4">
+                <div
+                  className={`flex w-full p-[1px] rounded-xl overflow-hidden ${
+                    commentInputSelected[idx]
+                      ? "bg-gradient-to-r from-[#41cfe8] to-[#d955ea]"
+                      : ""
+                  } `}
+                >
+                  <div className="flex w-full bg-[var(--light-gray)] rounded-xl px-4 items-center">
                     <input
                       type="text"
+                      value={comment[idx]}
+                      onChange={(e) => {
+                        const updatedComment = [...comment];
+                        updatedComment[idx] = e.target.value;
+                        setComment(updatedComment);
+                      }}
                       placeholder="Write your comment"
                       className="bg-transparent w-full outline-none text-[var(--regular-text)] text-sm AvenirLight placeholder:text-[var(--light-text)]"
+                      onFocus={() => {
+                        const updatedSelection = [...commentInputSelected];
+                        updatedSelection[idx] = !updatedSelection[idx];
+                        setCommentInputSelected(updatedSelection);
+                      }}
+                      onBlur={() => {
+                        const updatedSelection = [...commentInputSelected];
+                        updatedSelection[idx] = !updatedSelection[idx];
+                        setCommentInputSelected(updatedSelection);
+                      }}
                     />
+                    <i
+                      className={`ri-send-plane-2-fill text-xl cursor-pointer ${
+                        commentInputSelected[idx]
+                          ? "text-[var(--light-icon-color)] hover:text-white"
+                          : "text-transparent"
+                      } `}
+                      onClick={() => {
+                        if (comment[idx]) {
+                          const updatedComment = [...comment];
+                          updatedComment[idx] = "";
+                          setComment(updatedComment);
+                        }
+                      }}
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -448,8 +519,8 @@ const RecentActivity = ({ recentActivities }) => {
                     <p className="text-xs AvenirLight text-[var(--light-text)]">
                       {item.desc}
                     </p>
-                    <div className="flex w-1 h-1 bg-purple-500 rounded-full"></div>
-                    <p className="text-xs AvenirBlack bg-gradient-to-r from-[#41cfe8] to-[#d955ea] bg-clip-text text-transparent">
+                    <div className="flex w-1 h-1 bg-pink-400 rounded-full"></div>
+                    <p className="text-xs AvenirRegular text-pink-400">
                       3 hrs ago
                     </p>
                   </div>
@@ -464,7 +535,7 @@ const RecentActivity = ({ recentActivities }) => {
                     /tip
                   </p>
                 </div>
-                <div className="flex rounded-xl bg-gradient-to-r from-[#41cfe8] to-[#d955ea] p-1 px-3 text-sm AvenirBlack cursor-pointer">
+                <div className="flex rounded-xl bg-cyan-600 p-1 px-3 text-xs AvenirRegular text-white cursor-pointer hover:bg-cyan-500 transition-all duration-500">
                   Thanks
                 </div>
               </div>
