@@ -135,10 +135,9 @@ const Home = () => {
   );
   const [comment, setComment] = useState(Array(frames.length).fill(""));
 
-
   return (
     <>
-      <div className="w-full h-full flex">
+      <div className="w-full h-full flex pb-2">
         {/* section 1 */}
         <div className="flex flex-col gap-4 w-[20%] fixed">
           <ProfileCard />
@@ -201,15 +200,12 @@ const Home = () => {
           />
         </div>
         {/* section 3 */}
-        <div>
-          <div className="flex flex-col h-full left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4 py-5">
+        <div className="flex flex-col h-[87.5%] left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4">
           <p className="text-lg AvenirRegular text-[var(--dark-text)]">
             Recent activity
           </p>
           <RecentActivity recentActivities={recentActivities} />
         </div>
-        </div>
-        
       </div>
     </>
   );
@@ -313,15 +309,44 @@ const NewsLetters = ({ newsLetters }) => {
 };
 
 const UserStories = ({ users }) => {
+  let length = users.length;
+  let [userLeft, setUserLeft] = useState(0);
+  let [userRight, setUserRight] = useState(8);
+
+  const updateLeft = () => {
+    if (userLeft > 0) {
+      setUserLeft(userLeft - 1);
+      setUserRight(userRight - 1);
+      console.log(userLeft, userRight);
+    }
+  };
+  const updateRight = () => {
+    if (userRight < length) {
+      setUserLeft(userLeft + 1);
+      setUserRight(userRight + 1);
+      console.log(userLeft, userRight);
+    }
+  };
   return (
     <>
-      <div className="flex ">
-        <div className="flex w-6 h-6 -left-2 top-7 bg-[var(--lighter-gray)] justify-center items-center  z-10 absolute rounded-full cursor-pointer">
-          <i className="ri-arrow-left-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500"></i>
+      <div className="flex transition-all duration-500">
+        <div
+          className={`flex w-6 h-6 -left-2 top-7 ${
+            userLeft > 0 ? "bg-[var(--lighter-gray)]" : ""
+          } justify-center items-center  z-10 absolute rounded-full cursor-pointer `}
+          onClick={updateLeft}
+        >
+          <i
+            className={` ${
+              userLeft > 0
+                ? "ri-arrow-left-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500 transition-all duration-500"
+                : ""
+            } `}
+          ></i>
         </div>
         <div className="flex gap-6 overflow-hidden relative items-center">
           {users?.length > 0 &&
-            users.map((item, idx) => (
+            users.slice(userLeft, userRight).map((item, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center gap-1 group cursor-pointer "
@@ -329,7 +354,7 @@ const UserStories = ({ users }) => {
                 <div className="flex w-20 h-20 rounded-2xl overflow-hidden p-0.5 border-2 border-[var(--lighter-gray)] hover:border-cyan-500 transition-all duration-500">
                   <img
                     src={item.img}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover rounded-xl select-none"
                   />
                 </div>
 
@@ -339,8 +364,19 @@ const UserStories = ({ users }) => {
               </div>
             ))}
         </div>
-        <div className="flex w-6 h-6 -right-2 top-7 bg-[var(--lighter-gray)] justify-center items-center z-10 absolute rounded-full cursor-pointer">
-          <i className="ri-arrow-right-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500"></i>
+        <div
+          className={`flex w-6 h-6 -right-2 top-7  ${
+            userRight < length ? "bg-[var(--lighter-gray)]" : ""
+          } justify-center items-center z-10 absolute rounded-full cursor-pointer`}
+          onClick={updateRight}
+        >
+          <i
+            className={` ${
+              userRight < length
+                ? "ri-arrow-right-s-line text-xl text-[var(--icon-color)] hover:text-cyan-500 transition-all duration-500"
+                : ""
+            } `}
+          ></i>
         </div>
       </div>
     </>
@@ -497,7 +533,7 @@ const Frames = ({
 const RecentActivity = ({ recentActivities }) => {
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 overflow-y-auto">
         {recentActivities?.length > 0 &&
           recentActivities.map((item, idx) => (
             <div
