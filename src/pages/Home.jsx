@@ -137,6 +137,10 @@ const Home = () => {
 
   return (
     <>
+    <style>
+      {`
+      `}
+    </style>
       <div className="w-full h-full flex pb-2">
         {/* section 1 */}
         <div className="flex flex-col gap-4 w-[20%] fixed">
@@ -484,7 +488,7 @@ const Frames = ({
                       : ""
                   } `}
                 >
-                  <div className="flex w-full bg-[var(--light-gray)] rounded-xl px-4 items-center">
+                  <div className="flex w-full bg-[var(--light-gray)] gap-2 rounded-xl px-4 items-center">
                     <input
                       type="text"
                       value={comment[idx]}
@@ -533,7 +537,25 @@ const Frames = ({
 const RecentActivity = ({ recentActivities }) => {
   return (
     <>
-      <div className="flex flex-col gap-4 overflow-y-auto">
+    <style>
+      {`
+        .roundedScroll::-webkit-scrollbar {
+          width: 6px; /* Optional: Set width for the scrollbar */
+        }
+        .roundedScroll::-webkit-scrollbar-track {
+          border-radius: 6px;
+        }
+        .roundedScroll::-webkit-scrollbar-thumb {
+          background-color: #414141;
+          border-radius: 6px;
+          
+        }
+        .roundedScroll::-webkit-scrollbar-thumb:hover {
+          background-color: #484848;
+          border-radius: 8px;
+        }`}
+    </style>
+      <div className="flex flex-col gap-4 overflow-y-auto roundedScroll pr-1">
         {recentActivities?.length > 0 &&
           recentActivities.map((item, idx) => (
             <div
