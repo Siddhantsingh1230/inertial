@@ -8,3 +8,7 @@ git checkout dev
 ```
 Start working
 
+
+```
+Follow Up Dependecies: npm i react-modern-drawer 
+```

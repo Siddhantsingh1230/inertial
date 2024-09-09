@@ -21,6 +21,20 @@ html {
   height: 100%;
 }
 
+/* here all colors are defined */
+:root {
+  --dark-gray : #1A1A1A;
+  --light-gray : #282828;
+  --lighter-gray : #2F2E2E;
+  --hover-gray : #414141;
+  --text-box-color : #222222;
+  --dark-text : #fbf9f9 ;
+  --regular-text : #bbbbbb ;
+  --light-text : #888888 ;
+  --icon-color : #AFAFAF;
+  --light-icon-color : #797979;
+}
+
 /* Fonts */
 
 @font-face {
@@ -39,7 +53,32 @@ html {
   font-family: Mojita;
   src: url("./assets/fonts/Mojita.ttf");
 }
+@font-face {
+  font-family: StretchPro;
+  src: url("./assets/fonts/StretchPro.otf");
+}
+@font-face {
+  font-family: AvenirRegular;
+  src: url("./assets/fonts/AvenirRegular.ttf");
+}
+@font-face {
+  font-family: AvenirBlack;
+  src: url("./assets/fonts/AvenirBlack.ttf");
+}
+@font-face {
+  font-family: AvenirLight;
+  src: url("./assets/fonts/AvenirLight.ttf");
+}
 
+.AvenirLight{
+  font-family: AvenirLight;
+}
+.AvenirRegular {
+  font-family: AvenirRegular;
+}
+.AvenirBlack {
+  font-family: AvenirBlack;
+}
 .GreySansBlack {
   font-family: GreySansBlack;
 }
@@ -52,7 +91,9 @@ html {
 .Mojita {
   font-family: Mojita;
 }
-
+.StretchPro {
+  font-family: StretchPro;
+}
 .inter {
   font-family: "Inter", sans-serif;
 }
@@ -157,7 +198,8 @@ html {
   left: 0;
   height: 100%;
   width: 100%;
-  background: linear-gradient(to right, #010101 40%, transparent 60%);
+  background: linear-gradient(to right, #010101 27%, transparent 60%);
+  z-index: 10;
 }
 .swarmFade::after {
   content: "";
@@ -167,6 +209,7 @@ html {
   height: 60%;
   width: 100%;
   background: linear-gradient(to bottom, #010101 3%, transparent 97%);
+  z-index: 10;
 }
 
 .downFade::after {
@@ -182,16 +225,6 @@ html {
 .skew {
   transform: perspective(1000px) rotateY(-30deg) rotateX(20deg); /* Apply the skew effect */
 }
-
-.o-stretch{
-  display: inline-block;
-  border-radius: 1rem;
-  height: calc(1rem - 2px);
-  width: 2rem;
-  border:4px solid rgb(255, 255, 255) ;
-  background: #000000;
-}
-
 
 .login-skew {
   transform: perspective(1000px) rotateY(-15deg) rotateX(15deg); /* Apply the skew effect */
@@ -238,4 +271,10 @@ html {
   filter: blur(5px);
   opacity: 1;
   animation: glowingBtnAnimate 8s linear infinite;
+}
+
+.gridBg {
+  background-image: url(./assets/images/gridsvg.svg);
+  background-repeat: repeat;
+  background-position: center center;
 }
