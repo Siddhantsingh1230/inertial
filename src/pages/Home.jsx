@@ -13,6 +13,7 @@ import u5 from "../assets/images/s7.jfif";
 import u6 from "../assets/images/s8.jfif";
 import u7 from "../assets/images/s9.jpg";
 import { getTimeDifference } from "../utils/DateFormat";
+import AddFrame from "../components/AddFrame";
 
 const Home = () => {
   const [tagList, setTagList] = useState([
@@ -134,82 +135,94 @@ const Home = () => {
     Array(frames.length).fill(false)
   );
   const [comment, setComment] = useState(Array(frames.length).fill(""));
+  const [addFrameVisibility, setAddFrameVisibility] = useState(false);
 
   return (
     <>
-    <style>
-      {`
+      <style>
+        {`
       `}
-    </style>
-      <div className="w-full h-full flex pb-2">
-        {/* section 1 */}
-        <div className="flex flex-col gap-4 w-[20%] fixed">
-          <ProfileCard />
-          {/* skills section */}
-          <div className="flex flex-col w-full gap-3 ">
-            <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
-              My Tags
-            </p>
-            {/* tags section */}
-            <div className="flex flex-wrap gap-2 w-full">
-              {tagList?.length > 0 &&
-                tagList.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[var(--lighter-gray)] p-1.5 px-3 rounded-2xl cursor-pointer hover:bg-[var(--light-gray)] "
-                    title="tag"
-                  >
-                    <div className="flex gap-1 text-xs AvenirRegular text-[var(--regular-text)] ">
-                      <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">
-                        #
-                      </p>
-                      <p>{textEllipsis(item, 10)}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-
-          {/* newsletter section */}
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between items-center">
+      </style>
+      <div className="flex w-full h-full relative">
+        <div className="w-full h-full flex pb-2">
+          {/* section 1 */}
+          <div className="flex flex-col gap-4 w-[20%] fixed">
+            <ProfileCard />
+            {/* skills section */}
+            <div className="flex flex-col w-full gap-3 ">
               <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
-                NewsLetters
+                My Tags
               </p>
-              <div className="flex gap-6 justify-center items-center">
-                <i
-                  className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-cyan-500"
-                  title="search"
-                ></i>
-                <div
-                  className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-cyan-500 group"
-                  title="Add"
-                >
-                  <i className="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-cyan-500"></i>
-                </div>
+              {/* tags section */}
+              <div className="flex flex-wrap gap-2 w-full">
+                {tagList?.length > 0 &&
+                  tagList.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[var(--lighter-gray)] p-1.5 px-3 rounded-2xl cursor-pointer hover:bg-[var(--light-gray)] "
+                      title="tag"
+                    >
+                      <div className="flex gap-1 text-xs AvenirRegular text-[var(--regular-text)] ">
+                        <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">
+                          #
+                        </p>
+                        <p>{textEllipsis(item, 10)}</p>
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
-            <NewsLetters newsLetters={newsLetters} />
+
+            {/* newsletter section */}
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between items-center">
+                <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
+                  NewsLetters
+                </p>
+                <div className="flex gap-6 justify-center items-center">
+                  <i
+                    className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-cyan-500"
+                    title="search"
+                  ></i>
+                  <div
+                    className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-cyan-500 group"
+                    title="Add"
+                  >
+                    <i className="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-cyan-500"></i>
+                  </div>
+                </div>
+              </div>
+              <NewsLetters newsLetters={newsLetters} />
+            </div>
+          </div>
+          {/* section 2 */}
+          <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
+            <UserStories users={users} />
+            <NewFrame onClick={()=>{
+              console.log("NewFrame clicked");
+              setAddFrameVisibility(true);
+            }}/>
+            <Frames
+              frames={frames}
+              commentInputSelected={commentInputSelected}
+              setCommentInputSelected={setCommentInputSelected}
+              comment={comment}
+              setComment={setComment}
+            />
+          </div>
+          {/* section 3 */}
+          <div className="flex flex-col h-[87.5%] left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4">
+            <p className="text-lg AvenirRegular text-[var(--dark-text)]">
+              Recent activity
+            </p>
+            <RecentActivity recentActivities={recentActivities} />
           </div>
         </div>
-        {/* section 2 */}
-        <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
-          <UserStories users={users} />
-          <Frames
-            frames={frames}
-            commentInputSelected={commentInputSelected}
-            setCommentInputSelected={setCommentInputSelected}
-            comment={comment}
-            setComment={setComment}
-          />
-        </div>
-        {/* section 3 */}
-        <div className="flex flex-col h-[87.5%] left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4">
-          <p className="text-lg AvenirRegular text-[var(--dark-text)]">
-            Recent activity
-          </p>
-          <RecentActivity recentActivities={recentActivities} />
-        </div>
+        {addFrameVisibility && (
+          <div className="flex w-full h-screen absolute z-50">
+            <AddFrame addFrameVisibility={addFrameVisibility} setAddFrameVisibility={setAddFrameVisibility}/>
+          </div>
+        )}
       </div>
     </>
   );
@@ -537,8 +550,8 @@ const Frames = ({
 const RecentActivity = ({ recentActivities }) => {
   return (
     <>
-    <style>
-      {`
+      <style>
+        {`
         .roundedScroll::-webkit-scrollbar {
           width: 6px; /* Optional: Set width for the scrollbar */
         }
@@ -554,7 +567,7 @@ const RecentActivity = ({ recentActivities }) => {
           background-color: #484848;
           border-radius: 8px;
         }`}
-    </style>
+      </style>
       <div className="flex flex-col gap-4 overflow-y-auto roundedScroll pr-1">
         {recentActivities?.length > 0 &&
           recentActivities.map((item, idx) => (
@@ -599,6 +612,34 @@ const RecentActivity = ({ recentActivities }) => {
               </div>
             </div>
           ))}
+      </div>
+    </>
+  );
+};
+
+const NewFrame = ({onClick}) => {
+  return (
+    <>
+      <div className="flex flex-col gap-4" onClick={onClick}>
+        <div className="flex flex-col gap-3 bg-[var(--lighter-gray)] rounded-2xl p-3">
+          <div className="flex gap-3">
+            <div className="flex w-10 h-10 p-1 rounded-2xl bg-[var(--light-gray)] cursor-pointer">
+              <img
+                className="flex w-full h-full  object-cover rounded-xl "
+                src={userImage}
+              />
+            </div>
+            <div className={`flex w-full p-[1px] rounded-xl overflow-hidden `}>
+              <div className="flex w-full bg-[var(--light-gray)] gap-2 rounded-xl px-4 items-center">
+                <input
+                  type="text"
+                  placeholder="Add your thoughts"
+                  className="bg-transparent w-full outline-none text-[var(--regular-text)] text-sm AvenirLight placeholder:text-[var(--light-text)]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

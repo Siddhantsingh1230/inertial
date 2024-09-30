@@ -14,6 +14,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import LogoTrans from "../assets/images/Logotrans.png";
+import { useDispatch } from "react-redux";
+import { signupAsync } from "../slices/authSlice";
 const SignUp = () => {
   const [passType, setPassType] = useState("password");
   const {
@@ -22,7 +24,17 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSignup = (data) => {
+  const dispatch = useDispatch();
+  const onSignup = async(data) => {
+    const { email, password, username } = data;
+    const sanitizedObject = {
+      username: username.trim(),
+      // mobileNo: parseInt(mobileNo),
+      mobileNo: 9081674817,
+      email: email.trim(),
+      password,
+    };
+    dispatch(signupAsync(sanitizedObject));
     console.log(data);
   };
   return (

@@ -10,6 +10,7 @@ import LandingPage from "../pages/LandingPage";
 import Chronicles from "../pages/Chronicles";
 import Contact from "../pages/Contact";
 import Test from "../pages/Test";
+import Protected from "./Protected";
 
 const MainWrapper = () => {
   return (
@@ -19,9 +20,14 @@ const MainWrapper = () => {
           exact
           path="/"
           element={
+            // <Protected>
+            //   <Master>
+            //     <Home />
+            //   </Master>
+            // </Protected>
             <Master>
-              <Home />
-            </Master>
+                <Home />
+              </Master>
           }
         />
         <Route exact path="/start" element={<LandingPage />} />
