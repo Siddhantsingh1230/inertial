@@ -9,7 +9,7 @@ import login7 from "../assets/images/login7.jfif";
 import login8 from "../assets/images/login8.jfif";
 import login9 from "../assets/images/login9.jfif";
 import LogoTrans from "../assets/images/Logotrans.png";
-import loginAsync from "../slices/authSlice.js";
+import {loginAsync} from "../slices/authSlice.js";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { signup, login, logout, getUser } from "../api/auth.js";
+import { ERROR_STATUS, IDLE_STATUS, PENDING_STATUS } from "../lib/constants.js";
 
 const initialState = {
   user: null,
-  status: "idle",
+  status: IDLE_STATUS,
 };
 
 export const signupAsync = createAsyncThunk(
@@ -62,14 +63,14 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signupAsync.pending, (state) => {
-        state.status = "pending";
+        state.status =PENDING_STATUS;
       })
       .addCase(signupAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = IDLE_STATUS;
         console.log("signup fulfilled");
       })
       .addCase(signupAsync.rejected, (state, action) => {
-        state.status = "idle";
+        state.status = ERROR_STATUS;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           console.log("signup fulfilled");
         } else {
@@ -77,15 +78,15 @@ export const authSlice = createSlice({
         }
       })
       .addCase(loginAsync.pending, (state) => {
-        state.status = "loading";
+        state.status = PENDING_STATUS;
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = IDLE_STATUS;
         state.user = action.payload.user;
         console.log("login fulfilled");
       })
       .addCase(loginAsync.rejected, (state, action) => {
-        state.status = "idle";
+        state.status = IDLE_STATUS;
         state.user = null;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           console.log("login error");
@@ -94,15 +95,15 @@ export const authSlice = createSlice({
         }
       })
       .addCase(getUserAsync.pending, (state) => {
-        state.status = "loading";
+        state.status = PENDING_STATUS;
       })
       .addCase(getUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = IDLE_STATUS;
         state.user = action.payload.user;
         console.log("get user fulfilled");
       })
       .addCase(getUserAsync.rejected, (state, action) => {
-        state.status = "idle";
+        state.status = ERROR_STATUS;
         state.user = null;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           console.log("getUser  error");
@@ -111,12 +112,21 @@ export const authSlice = createSlice({
         }
       })
       .addCase(logoutAsync.pending, (state) => {
-        state.status = "loading";
+        state.status = PENDING_STATUS;
       })
       .addCase(logoutAsync.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = IDLE_STATUS;
         state.user = null;
         console.log("logout fulfilled");
+      })
+      .addCase(logoutAsync.rejected, (state, action) => {
+        state.status = ERROR_STATUS;
+        state.user = null;
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          console.log("logout  error");
+        } else {
+          console.log("logout network error");
+        }
       });
   },
 });

@@ -47,19 +47,10 @@ export const logout = async () => {
 };
 
 export const getUser = async () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;  // Fallback
-
-  if (!baseUrl) {
-    throw new Error("Base URL is not defined.");
-  }
-
   let path = "v1/user/me";
-
-  try {
-    const { data } = await axios.get(new URL(path, baseUrl));
-    return data;
-  } catch (error) {
-    // console.error("Error fetching user data:", error);
-    throw error;
-  }
+  const { data } = await axios.get(
+    new URL(path, import.meta.env.VITE_BASE_URL),
+    options
+  );
+  return data;
 };

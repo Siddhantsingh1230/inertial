@@ -20,14 +20,11 @@ const MainWrapper = () => {
           exact
           path="/"
           element={
-            // <Protected>
-            //   <Master>
-            //     <Home />
-            //   </Master>
-            // </Protected>
-            <Master>
+            <Protected>
+              <Master>
                 <Home />
               </Master>
+            </Protected>
           }
         />
         <Route exact path="/start" element={<LandingPage />} />

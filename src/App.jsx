@@ -1,17 +1,18 @@
 import { ToastContainer } from "react-toastify"; // For Toasts
 import "react-toastify/dist/ReactToastify.css";
 import MainWrapper from "./components/MainWrapper";
-// import { useDispatch } from "react-redux";
-// import { getUserAsync } from "./slices/authSlice";
-// import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getUserAsync } from "./slices/authSlice";
+import { useEffect } from "react";
 
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getUserAsync());
-  // }, []);
+  useEffect(() => {
+    dispatch(getUserAsync());
+    console.log("dispatching")
+  }, []);
   return (
     <>
       <MainWrapper />
