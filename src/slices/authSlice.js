@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signup, login, logout, getUser, verifyUser } from "../api/auth.js";
+import { signup, login, logout, getUser, verifyUser, resendOtp } from "../api/auth.js";
 import { ERROR_STATUS, IDLE_STATUS, PENDING_STATUS } from "../lib/constants.js";
 import Toasts from "../app/Toasts.js";
 
@@ -62,6 +62,18 @@ export const verifyUserAsync = createAsyncThunk(
   async (otpData, thunkAPI) => {
     try {
       const data = await verifyUser(otpData);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const resendOtpAsync = createAsyncThunk(
+  "auth/resendOtp",
+  async (emailData, thunkAPI) => {
+    try {
+      const data = await resendOtp(emailData);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -148,6 +160,20 @@ export const authSlice = createSlice({
         Toasts("success", action.payload.message);
       })
       .addCase(verifyUserAsync.rejected, (state, action) => {
+        state.status = ERROR_STATUS;
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          Toasts("error", action.payload.response.data.message || "Error Occurred");
+        } else {
+          console.log("verify fulfilled");
+        }
+      }).addCase(resendOtpAsync.pending, (state) => {
+        state.status =PENDING_STATUS;
+      })
+      .addCase(resendOtpAsync.fulfilled, (state, action) => {
+        state.status = IDLE_STATUS;
+        Toasts("success", action.payload.message);
+      })
+      .addCase(resendOtpAsync.rejected, (state, action) => {
         state.status = ERROR_STATUS;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           Toasts("error", action.payload.response.data.message || "Error Occurred");
