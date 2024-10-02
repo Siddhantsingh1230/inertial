@@ -12,7 +12,7 @@ import s11 from "../assets/images/s11.jfif";
 import s12 from "../assets/images/s12.jpg";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoTrans from "../assets/images/Logotrans.png";
 import { useDispatch } from "react-redux";
 import { signupAsync } from "../slices/authSlice";
@@ -25,17 +25,20 @@ const SignUp = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const onSignup = async(data) => {
+  const navigate = useNavigate();
+  const onSignup = async (data) => {
     const { email, password, username } = data;
     const sanitizedObject = {
-      username: username.trim(),
-      // mobileNo: parseInt(mobileNo),
-      mobileNo: 9081674817,
+      name: username.trim(),
       email: email.trim(),
       password,
     };
-    dispatch(signupAsync(sanitizedObject));
-    console.log(data);
+    dispatch(signupAsync(sanitizedObject)).then((action) => {
+      if (action.type === "auth/signup/fulfilled") {
+        // Navigate to verify account page after signup is successful
+        navigate(`/verifyaccount/email/${encodeURIComponent(email.trim())}`);
+      }
+    });
   };
   return (
     <>

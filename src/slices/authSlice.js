@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signup, login, logout, getUser } from "../api/auth.js";
+import { signup, login, logout, getUser, verifyUser } from "../api/auth.js";
 import { ERROR_STATUS, IDLE_STATUS, PENDING_STATUS } from "../lib/constants.js";
+import Toasts from "../app/Toasts.js";
 
 const initialState = {
   user: null,
@@ -56,6 +57,18 @@ export const logoutAsync = createAsyncThunk(
   }
 );
 
+export const verifyUserAsync = createAsyncThunk(
+  "auth/verifyuser",
+  async (otpData, thunkAPI) => {
+    try {
+      const data = await verifyUser(otpData);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -67,14 +80,14 @@ export const authSlice = createSlice({
       })
       .addCase(signupAsync.fulfilled, (state, action) => {
         state.status = IDLE_STATUS;
-        console.log("signup fulfilled");
+        Toasts("success", action.payload.message);
       })
       .addCase(signupAsync.rejected, (state, action) => {
         state.status = ERROR_STATUS;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
-          console.log("signup fulfilled");
+          Toasts("error", action.payload.response.data.message || "Error Occurred");
         } else {
-          console.log("signup fulfilled");
+          Toasts("error","Network Error");
         }
       })
       .addCase(loginAsync.pending, (state) => {
@@ -83,15 +96,15 @@ export const authSlice = createSlice({
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.status = IDLE_STATUS;
         state.user = action.payload.user;
-        console.log("login fulfilled");
+        Toasts("success", action.payload.message);
       })
       .addCase(loginAsync.rejected, (state, action) => {
         state.status = IDLE_STATUS;
         state.user = null;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
-          console.log("login error");
+          Toasts("error", action.payload.response.data.message || "Error Occurred");
         } else {
-          console.log("login network error");
+          Toasts("error","Network Error");
         }
       })
       .addCase(getUserAsync.pending, (state) => {
@@ -117,7 +130,7 @@ export const authSlice = createSlice({
       .addCase(logoutAsync.fulfilled, (state, action) => {
         state.status = IDLE_STATUS;
         state.user = null;
-        console.log("logout fulfilled");
+        Toasts("success", action.payload.message);
       })
       .addCase(logoutAsync.rejected, (state, action) => {
         state.status = ERROR_STATUS;
@@ -126,6 +139,20 @@ export const authSlice = createSlice({
           console.log("logout  error");
         } else {
           console.log("logout network error");
+        }
+      }).addCase(verifyUserAsync.pending, (state) => {
+        state.status =PENDING_STATUS;
+      })
+      .addCase(verifyUserAsync.fulfilled, (state, action) => {
+        state.status = IDLE_STATUS;
+        Toasts("success", action.payload.message);
+      })
+      .addCase(verifyUserAsync.rejected, (state, action) => {
+        state.status = ERROR_STATUS;
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          Toasts("error", action.payload.response.data.message || "Error Occurred");
+        } else {
+          console.log("verify fulfilled");
         }
       });
   },

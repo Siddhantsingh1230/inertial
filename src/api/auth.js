@@ -54,3 +54,15 @@ export const getUser = async () => {
   );
   return data;
 };
+
+export const verifyUser = async (otpData) => {
+  let path = "v1/auth/verifyUser";
+  const { data } = await axios.post(
+    new URL(path, import.meta.env.VITE_BASE_URL),
+    {
+      ...otpData,
+    },
+    options
+  );
+  return data;
+};

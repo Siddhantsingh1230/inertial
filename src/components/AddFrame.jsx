@@ -1,10 +1,14 @@
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { createFrameAsync } from "../slices/frameSlice";
 
 const AddFrame = ({ addFrameVisibility, setAddFrameVisibility }) => {
+  const user = useSelector((state) => state.auth.user);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imgSrc, setImgSrc] = useState("");
+  const [imgFile, setImgFile] = useState();
   const inputImageFile = useRef(null);
   const {
     register,
@@ -12,8 +16,16 @@ const AddFrame = ({ addFrameVisibility, setAddFrameVisibility }) => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
   const handleRegistration = (data) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("image", imgFile);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("userId", user._id);
+    console.log(user._id);
+    dispatch(createFrameAsync(formData));
+    setAddFrameVisibility(false);
   };
 
   return (
@@ -67,7 +79,6 @@ const AddFrame = ({ addFrameVisibility, setAddFrameVisibility }) => {
               <textarea
                 rows="4"
                 value={description}
-                
                 maxLength={2000}
                 title="description"
                 {...register("description", {
@@ -84,10 +95,10 @@ const AddFrame = ({ addFrameVisibility, setAddFrameVisibility }) => {
                 </p>
               )}
               <div className="flex w-full justify-end text-xs pt-1 text-[var(--regular-text)]  ">
-              <p>{`${description.length}/2000`}</p>
+                <p>{`${description.length}/2000`}</p>
+              </div>
             </div>
-            </div>
-            
+
             {/* Thumbnail section */}
             <div className="flex flex-col gap-2 text-sm">
               <p className=" select-none text-[var(--regular-text)]">
@@ -113,21 +124,21 @@ const AddFrame = ({ addFrameVisibility, setAddFrameVisibility }) => {
                     className="hidden"
                     id="image"
                     type="file"
-                    accept="image/*"
-                    {...register('image', { required: "Please add an image" })}
+                    {...register("image", { required: "Please add an image" })}
                     title="image"
                     onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setImgSrc(URL.createObjectURL(file)); // Convert file to a URL
+                      console.log(e.target.files[0]);
+                      setImgFile(e.target.files[0]);
+                      if (e.target.files[0]) {
+                        setImgSrc(URL.createObjectURL(e.target.files[0])); // Convert file to a URL
                       }
                     }}
                   />
                   {errors.image && (
-                <p className="inline-flex items-center rounded-md px-1 py-0 text-[10px] font-semibold text-red-700 select-none">
-                  {errors.image.message}
-                </p>
-              )}
+                    <p className="inline-flex items-center rounded-md px-1 py-0 text-[10px] font-semibold text-red-700 select-none">
+                      {errors.image.message}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
