@@ -12,6 +12,7 @@ import Contact from "../pages/Contact";
 import Test from "../pages/Test";
 import Protected from "./Protected";
 import VerifyAccount from "../pages/VerifyAccount";
+import Profile from "../pages/Profile";
 
 const MainWrapper = () => {
   return (
@@ -24,6 +25,17 @@ const MainWrapper = () => {
             <Protected>
               <Master>
                 <Home />
+              </Master>
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/profile/:id"
+          element={
+            <Protected>
+              <Master>
+                <Profile />
               </Master>
             </Protected>
           }

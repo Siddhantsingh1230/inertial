@@ -6,7 +6,7 @@ const Master = ({ children }) => {
       <div className="flex flex-col w-full gap-3 bg-[var(--dark-gray)] ">
         {/* Header section */}
         <div className="flex w-full sm:h-16">
-          <Header user = {"john wick"}/>
+          <Header/>
         </div>
         {/* other child component */}
         <div className="w-full h-full px-6 ">{children}</div>

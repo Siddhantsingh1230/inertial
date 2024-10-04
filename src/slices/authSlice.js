@@ -24,7 +24,6 @@ export const loginAsync = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      console.log("entered loginAsync");
       const data = await login(userData);
       return data;
     } catch (error) {
@@ -40,7 +39,12 @@ export const getUserAsync = createAsyncThunk(
       const data = await getUser();
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      const serializableError = {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      };
+      return thunkAPI.rejectWithValue(serializableError);
     }
   }
 );
@@ -125,15 +129,16 @@ export const authSlice = createSlice({
       .addCase(getUserAsync.fulfilled, (state, action) => {
         state.status = IDLE_STATUS;
         state.user = action.payload.user;
-        console.log("get user fulfilled");
+        // console.log("get user fulfilled");
       })
       .addCase(getUserAsync.rejected, (state, action) => {
         state.status = ERROR_STATUS;
         state.user = null;
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
-          console.log("getUser  error");
+          // console.log("getUser  error");
         } else {
-          console.log("get user network error");
+          // Toasts("error","Network Error");
+          // console.log("get user network error");
         }
       })
       .addCase(logoutAsync.pending, (state) => {
@@ -150,7 +155,7 @@ export const authSlice = createSlice({
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           console.log("logout  error");
         } else {
-          console.log("logout network error");
+          console.log("Network error");
         }
       }).addCase(verifyUserAsync.pending, (state) => {
         state.status =PENDING_STATUS;
@@ -178,7 +183,7 @@ export const authSlice = createSlice({
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           Toasts("error", action.payload.response.data.message || "Error Occurred");
         } else {
-          console.log("verify fulfilled");
+          // console.log("verify fulfilled");
         }
       });
   },

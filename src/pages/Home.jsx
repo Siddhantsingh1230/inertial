@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../assets/images/bg2.jpg";
 import userImage from "../assets/images/login8.jfif";
 import n1 from "../assets/images/art17.jpg";
@@ -14,8 +14,13 @@ import u6 from "../assets/images/s8.jfif";
 import u7 from "../assets/images/s9.jpg";
 import { getTimeDifference } from "../utils/DateFormat";
 import AddFrame from "../components/AddFrame";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFramesAsync } from "../slices/frameSlice";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const user = useSelector((state) => state.auth.user);
+  const frames = useSelector((state) => state.frame.allFrames);
   const [tagList, setTagList] = useState([
     "AI",
     "Js",
@@ -47,49 +52,6 @@ const Home = () => {
     { id: 5, name: "Mudreh", img: u5 },
     { id: 6, name: "Juliet", img: u6 },
     { id: 7, name: "Stephen", img: u7 },
-  ]);
-
-  const [frames, setFrames] = useState([
-    {
-      id: 1,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 2,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 3,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 4,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
   ]);
 
   const [recentActivities, setRecentActivities] = useState([
@@ -136,7 +98,12 @@ const Home = () => {
   );
   const [comment, setComment] = useState(Array(frames.length).fill(""));
   const [addFrameVisibility, setAddFrameVisibility] = useState(false);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getAllFramesAsync());
+    // dispatch(getUserAsync());
+  });
   return (
     <>
       <style>
@@ -147,7 +114,7 @@ const Home = () => {
         <div className="w-full h-full flex pb-2">
           {/* section 1 */}
           <div className="flex flex-col gap-4 w-[20%] fixed">
-            <ProfileCard />
+            <ProfileCard user={user} />
             {/* skills section */}
             <div className="flex flex-col w-full gap-3 ">
               <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
@@ -198,10 +165,12 @@ const Home = () => {
           {/* section 2 */}
           <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
             <UserStories users={users} />
-            <NewFrame onClick={()=>{
-              console.log("NewFrame clicked");
-              setAddFrameVisibility(true);
-            }}/>
+            <NewFrame
+              onClick={() => {
+                console.log("NewFrame clicked");
+                setAddFrameVisibility(true);
+              }}
+            />
             <Frames
               frames={frames}
               commentInputSelected={commentInputSelected}
@@ -220,7 +189,10 @@ const Home = () => {
         </div>
         {addFrameVisibility && (
           <div className="flex w-full h-screen absolute z-50">
-            <AddFrame addFrameVisibility={addFrameVisibility} setAddFrameVisibility={setAddFrameVisibility}/>
+            <AddFrame
+              addFrameVisibility={addFrameVisibility}
+              setAddFrameVisibility={setAddFrameVisibility}
+            />
           </div>
         )}
       </div>
@@ -228,7 +200,7 @@ const Home = () => {
   );
 };
 
-const ProfileCard = () => {
+const ProfileCard = ({ user }) => {
   return (
     <>
       <div className="flex flex-col w-full rounded-2xl overflow-hidden bg-[var(--light-gray)]">
@@ -270,10 +242,10 @@ const ProfileCard = () => {
           {/* username div */}
           <div className="flex flex-col w-full justify-center items-center ">
             <p className="text-md text-[var(--dark-text)] AvenirRegular">
-              John Wick
+              {user?.name}
             </p>
             <p className="text-xs text-[var(--light-text)] AvenirRegular hover:underline cursor-pointer ">
-              @wickteam
+              {user?.email}
             </p>
           </div>
           {/* description */}
@@ -283,9 +255,15 @@ const ProfileCard = () => {
           <div className="flex flex-col gap-2 pt-1 ">
             <div className="flex w-full h-[0.1rem] bg-[var(--text-box-color)]"></div>
             <div className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none">
-              <p className="text-sm text-white AvenirRegular" title="Profile">
-                My Profile
-              </p>
+              {user && (
+                <Link
+                  to={`/profile/${user._id}`}
+                  className="text-sm text-white AvenirRegular"
+                  title="Profile"
+                >
+                  My Profile
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -420,13 +398,13 @@ const Frames = ({
                 <div className="flex w-12 h-12 p-1 rounded-2xl bg-[var(--light-gray)] cursor-pointer">
                   <img
                     className="flex w-full h-full  object-cover rounded-xl "
-                    src={item.userimg}
+                    src={`http://localhost:5000/images/${item.thumbnail}`}
                   />
                 </div>
                 <div className="flex flex-col cursor-pointer">
                   <div className="flex gap-1 items-center">
                     <p className="text-sm AvenirLight text-[var(--regular-text)]">
-                      {item.email}
+                      {item.userId.email}
                     </p>
                     <i
                       className="ri-verified-badge-fill text-blue-400"
@@ -435,11 +413,11 @@ const Frames = ({
                   </div>
                   <div className="flex items-center gap-2">
                     <p className="text-md AvenirRegular text-[var(--dark-text)]">
-                      {item.username}
+                      {item.userId.name}
                     </p>
                     <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
                     <p className="text-xs AvenirRegular text-pink-400">
-                      {getTimeDifference(item.postTime)}
+                      {getTimeDifference(item.createdAt)}
                     </p>
                   </div>
                 </div>
@@ -451,11 +429,14 @@ const Frames = ({
                 </div>
               </div>
               <p className="text-sm text-[var(--regular-text)] AvenirRegular">
+                {item.title}
+              </p>
+              <p className="text-sm text-[var(--regular-text)] AvenirRegular">
                 {item.description}
               </p>
               <div className="w-full h-64 rounded-2xl overflow-hidden">
                 <img
-                  src={item.thumbnail}
+                  src={`http://localhost:5000/images/${item.thumbnail}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -617,7 +598,7 @@ const RecentActivity = ({ recentActivities }) => {
   );
 };
 
-const NewFrame = ({onClick}) => {
+const NewFrame = ({ onClick }) => {
   return (
     <>
       <div className="flex flex-col gap-4" onClick={onClick}>

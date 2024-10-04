@@ -34,7 +34,7 @@ const Login = () => {
       email: email.trim(),
       password,
     };
-    console.log("sanitized obj:" ,sanitizedObject)
+    // console.log("sanitized obj:" ,sanitizedObject)
     dispatch(loginAsync(sanitizedObject));
   };
 
@@ -163,7 +163,7 @@ const Login = () => {
                   )}
                 </div>
                 <Link
-                  to="/forgotpassword"
+                  // to="/forgotpassword"
                   className="flex w-full cursor-pointer justify-end text-xs text-white select-none"
                 >
                   <p className="text-cyan-200 hover:underline">
