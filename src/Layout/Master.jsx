@@ -1,7 +1,7 @@
 import Header from "./Header";
 
 const Master = ({ children }) => {
-  return (
+  return( 
     <>
       <div className="flex flex-col w-full gap-3 bg-[var(--dark-gray)] ">
         {/* Header section */}
