@@ -412,7 +412,7 @@ const Frames = ({
                     ></i>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-md AvenirRegular text-[var(--dark-text)]">
+                    <p className="text-md AvenirRegular text-[var(--dark-text)] capitalize">
                       {item.userId.name}
                     </p>
                     <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
