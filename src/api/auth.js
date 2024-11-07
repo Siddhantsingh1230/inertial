@@ -66,3 +66,15 @@ export const verifyUser = async (otpData) => {
   );
   return data;
 };
+
+export const resendOtp = async (emailData) => {
+  let path = "v1/auth/resendOtp";
+  const { data } = await axios.post(
+    new URL(path, import.meta.env.VITE_BASE_URL),
+    {
+      ...emailData,
+    },
+    options
+  );
+  return data;
+};

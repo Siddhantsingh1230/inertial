@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { verifyUserAsync } from "../slices/authSlice";
+import { verifyUserAsync,resendOtpAsync } from "../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const VerifyAccount = () => {
-  const {email} = useParams();
+  const { email } = useParams();
   const decodedEmail = decodeURIComponent(email);
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
@@ -16,13 +16,18 @@ const VerifyAccount = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(decodedEmail);
-    dispatch(verifyUserAsync({email : decodedEmail,otp})).then((action) => {
-        if (action.type === "auth/verifyuser/fulfilled") {
-          // Navigate to verify account page after signup is successful
-          navigate(`/login`);
-        }
-      });
+    dispatch(verifyUserAsync({ email: decodedEmail, otp })).then((action) => {
+      if (action.type === "auth/verifyuser/fulfilled") {
+        // Navigate to verify account page after signup is successful
+        navigate(`/login`);
+      }
+    });
   };
+
+  const resendOtp = async(e)=>{
+    e.preventDefault();
+    dispatch(resendOtpAsync({ email: decodedEmail}));
+  }
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -55,12 +60,15 @@ const VerifyAccount = () => {
           {error && <p className="text-red-500 mt-2">{error}</p>}
           {success && <p className="text-green-500 mt-2">{success}</p>}
         </form>
-        <p className="text-gray-600 mt-4">
+        <div className="flex gap-2 text-gray-600 mt-4">
           Didn't receive OTP?{" "}
-          <a href="#" className="text-blue-600 hover:text-blue-800">
+          <p
+            className="text-blue-600 hover:text-blue-800"
+            onClick={resendOtp}
+          >
             Resend
-          </a>
-        </p>
+          </p>
+        </div>
       </div>
     </div>
   );

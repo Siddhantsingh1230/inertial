@@ -1,4 +1,5 @@
 export const textEllipsis = (text, maxLength) => {
+  if (!text) return ""; // Return empty string if text is undefined or null
   if (text.length > maxLength) {
     text = text.substring(0, maxLength) + "...";
     return text;

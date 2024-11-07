@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUserAsync());
-    console.log("dispatching")
+    // console.log("dispatching")
   }, []);
   return (
     <>
