@@ -254,17 +254,16 @@ const ProfileCard = ({ user }) => {
           </p>
           <div className="flex flex-col gap-2 pt-1 ">
             <div className="flex w-full h-[0.1rem] bg-[var(--text-box-color)]"></div>
-            <div className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none">
-              {user && (
-                <Link
-                  to={`/profile/${user._id}`}
-                  className="text-sm text-white AvenirRegular"
-                  title="Profile"
-                >
+            {user && (
+              <Link
+                to={`/profile/${user._id}`}
+                className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none"
+              >
+                <p className="text-sm text-white AvenirRegular" title="Profile">
                   My Profile
-                </Link>
-              )}
-            </div>
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </div>
