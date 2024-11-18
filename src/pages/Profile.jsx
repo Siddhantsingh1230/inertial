@@ -190,7 +190,7 @@ const Profile = () => {
                     Toasts("success", "Link copied to clipboard");
                   }}
                 >
-                  <i class="ri-share-forward-line"></i> Share
+                  <i className="ri-share-forward-line"></i> Share
                 </button>
               </div>
               
@@ -249,7 +249,7 @@ const Profile = () => {
                 className="flex flex-col bg-[var(--lighter-gray)] rounded-2xl p-3 gap-2"
               >
                 <img
-                  src={`http://localhost:5000/images/${frame.thumbnail}`}
+                  src={frame.thumbnail}
                   alt={frame.title}
                   className="mb-2 w-full rounded-xl"
                 />
