@@ -104,13 +104,29 @@ const Home = () => {
     dispatch(getAllFramesAsync());
     // dispatch(getUserAsync());
   });
+
+  useEffect(() => {
+    if (addFrameVisibility) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    // Cleanup when the component unmounts
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [addFrameVisibility]);
   return (
     <>
       <style>
         {`
+        .no-scroll {
+          overflow: hidden;
+        }
       `}
       </style>
-      <div className="flex w-full h-full relative">
+      <div className="flex w-full h-full relative bg-[var(--dark-gray)]">
         <div className="w-full h-full flex pb-2">
           {/* section 1 */}
           <div className="flex flex-col gap-4 w-[20%] fixed">
@@ -188,7 +204,7 @@ const Home = () => {
           </div>
         </div>
         {addFrameVisibility && (
-          <div className="flex w-full h-screen absolute z-50">
+          <div className="flex w-full h-screen absolute  z-50">
             <AddFrame
               addFrameVisibility={addFrameVisibility}
               setAddFrameVisibility={setAddFrameVisibility}
@@ -254,17 +270,16 @@ const ProfileCard = ({ user }) => {
           </p>
           <div className="flex flex-col gap-2 pt-1 ">
             <div className="flex w-full h-[0.1rem] bg-[var(--text-box-color)]"></div>
-            <div className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none">
-              {user && (
-                <Link
-                  to={`/profile/${user._id}`}
-                  className="text-sm text-white AvenirRegular"
-                  title="Profile"
-                >
+            {user && (
+              <Link
+                to={`/profile/${user._id}`}
+                className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none"
+              >
+                <p className="text-sm text-white AvenirRegular" title="Profile">
                   My Profile
-                </Link>
-              )}
-            </div>
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -398,13 +413,13 @@ const Frames = ({
                 <div className="flex w-12 h-12 p-1 rounded-2xl bg-[var(--light-gray)] cursor-pointer">
                   <img
                     className="flex w-full h-full  object-cover rounded-xl "
-                    src={`http://localhost:5000/images/${item.thumbnail}`}
+                    src={item.thumbnail}
                   />
                 </div>
                 <div className="flex flex-col cursor-pointer">
                   <div className="flex gap-1 items-center">
                     <p className="text-sm AvenirLight text-[var(--regular-text)]">
-                      {item.userId.email}
+                      {item.userId?.email}
                     </p>
                     <i
                       className="ri-verified-badge-fill text-blue-400"
@@ -412,8 +427,8 @@ const Frames = ({
                     ></i>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-md AvenirRegular text-[var(--dark-text)]">
-                      {item.userId.name}
+                    <p className="text-md AvenirRegular text-[var(--dark-text)] capitalize">
+                      {item.userId?.name}
                     </p>
                     <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
                     <p className="text-xs AvenirRegular text-pink-400">
@@ -436,7 +451,7 @@ const Frames = ({
               </p>
               <div className="w-full h-64 rounded-2xl overflow-hidden">
                 <img
-                  src={`http://localhost:5000/images/${item.thumbnail}`}
+                  src={item.thumbnail}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -588,7 +603,7 @@ const RecentActivity = ({ recentActivities }) => {
                   </p>
                 </div>
                 <div className="flex rounded-xl bg-cyan-600 p-1 px-3 text-xs AvenirRegular text-white cursor-pointer hover:bg-cyan-500 transition-all duration-500">
-                  Thanks
+                  Clear
                 </div>
               </div>
             </div>
