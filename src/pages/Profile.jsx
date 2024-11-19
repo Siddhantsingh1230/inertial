@@ -175,7 +175,7 @@ const Profile = () => {
               </div>
               <div className="flex px-6 gap-2 py-2 w-full">
                 <Link
-                  to={`http://localhost:5000/v1/svg/${id}`}
+                  to={`${import.meta.env.VITE_BASE_URL}/v1/svg/${id}`}
                   className="w-2/3 flex text-sm justify-center AvenirLight py-1.5 rounded-lg  bg-pink-500 hover:bg-pink-600"
                 >
                   View Svg
@@ -185,7 +185,7 @@ const Profile = () => {
                   className="w-1/3 flex text-sm justify-center gap-1 AvenirLight py-1.5 rounded-lg  bg-pink-500 hover:bg-pink-600"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `http://localhost:5000/v1/svg/${id}`
+                      `${import.meta.env.VITE_BASE_URL}/v1/svg/${id}`
                     );
                     Toasts("success", "Link copied to clipboard");
                   }}
