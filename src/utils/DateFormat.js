@@ -1,4 +1,9 @@
-export const getTimeDifference=(fromDate, toDate = new Date())=> {
+export const getTimeDifference = (fromDate, toDate = new Date()) => {
+  // Convert fromDate to Date object if it's a string (ISO format)
+  if (typeof fromDate === 'string') {
+    fromDate = new Date(fromDate);
+  }
+
   const diffMilliseconds = toDate - fromDate;
 
   const diffYears = toDate.getFullYear() - fromDate.getFullYear();
@@ -17,8 +22,7 @@ export const getTimeDifference=(fromDate, toDate = new Date())=> {
   if (diffHours > 0) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
 
   const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
-  if (diffMinutes > 0)
-    return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
+  if (diffMinutes > 0) return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
 
   return "just now"; // for cases where the difference is less than a minute
-}
+};

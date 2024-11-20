@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../assets/images/bg2.jpg";
 import userImage from "../assets/images/login8.jfif";
 import n1 from "../assets/images/art17.jpg";
@@ -13,8 +13,14 @@ import u5 from "../assets/images/s7.jfif";
 import u6 from "../assets/images/s8.jfif";
 import u7 from "../assets/images/s9.jpg";
 import { getTimeDifference } from "../utils/DateFormat";
+import AddFrame from "../components/AddFrame";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFramesAsync } from "../slices/frameSlice";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const user = useSelector((state) => state.auth.user);
+  const frames = useSelector((state) => state.frame.allFrames);
   const [tagList, setTagList] = useState([
     "AI",
     "Js",
@@ -46,49 +52,6 @@ const Home = () => {
     { id: 5, name: "Mudreh", img: u5 },
     { id: 6, name: "Juliet", img: u6 },
     { id: 7, name: "Stephen", img: u7 },
-  ]);
-
-  const [frames, setFrames] = useState([
-    {
-      id: 1,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 2,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 3,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
-    {
-      id: 4,
-      username: "Mudreh Kumbirai",
-      userimg: u4,
-      email: "@muhadrehh",
-      postTime: new Date("2024-08-29T08:00:00"),
-      description:
-        "In some cases you may see a third-party client name, which indicates the Tweet came from a non-twitter application.",
-      thumbnail: bg,
-    },
   ]);
 
   const [recentActivities, setRecentActivities] = useState([
@@ -134,88 +97,126 @@ const Home = () => {
     Array(frames.length).fill(false)
   );
   const [comment, setComment] = useState(Array(frames.length).fill(""));
+  const [addFrameVisibility, setAddFrameVisibility] = useState(false);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getAllFramesAsync());
+    // dispatch(getUserAsync());
+  });
+
+  useEffect(() => {
+    if (addFrameVisibility) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    // Cleanup when the component unmounts
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [addFrameVisibility]);
   return (
     <>
-    <style>
-      {`
+      <style>
+        {`
+        .no-scroll {
+          overflow: hidden;
+        }
       `}
-    </style>
-      <div className="w-full h-full flex pb-2">
-        {/* section 1 */}
-        <div className="flex flex-col gap-4 w-[20%] fixed">
-          <ProfileCard />
-          {/* skills section */}
-          <div className="flex flex-col w-full gap-3 ">
-            <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
-              My Tags
-            </p>
-            {/* tags section */}
-            <div className="flex flex-wrap gap-2 w-full">
-              {tagList?.length > 0 &&
-                tagList.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[var(--lighter-gray)] p-1.5 px-3 rounded-2xl cursor-pointer hover:bg-[var(--light-gray)] "
-                    title="tag"
-                  >
-                    <div className="flex gap-1 text-xs AvenirRegular text-[var(--regular-text)] ">
-                      <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">
-                        #
-                      </p>
-                      <p>{textEllipsis(item, 10)}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-
-          {/* newsletter section */}
-          <div className="flex flex-col gap-3">
-            <div className="flex justify-between items-center">
+      </style>
+      <div className="flex w-full h-full relative bg-[var(--dark-gray)]">
+        <div className="w-full h-full flex pb-2">
+          {/* section 1 */}
+          <div className="flex flex-col gap-4 w-[20%] fixed">
+            <ProfileCard user={user} />
+            {/* skills section */}
+            <div className="flex flex-col w-full gap-3 ">
               <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
-                NewsLetters
+                My Tags
               </p>
-              <div className="flex gap-6 justify-center items-center">
-                <i
-                  className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-cyan-500"
-                  title="search"
-                ></i>
-                <div
-                  className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-cyan-500 group"
-                  title="Add"
-                >
-                  <i className="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-cyan-500"></i>
-                </div>
+              {/* tags section */}
+              <div className="flex flex-wrap gap-2 w-full">
+                {tagList?.length > 0 &&
+                  tagList.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[var(--lighter-gray)] p-1.5 px-3 rounded-2xl cursor-pointer hover:bg-[var(--light-gray)] "
+                      title="tag"
+                    >
+                      <div className="flex gap-1 text-xs AvenirRegular text-[var(--regular-text)] ">
+                        <p className="bg-gradient-to-r from-[#41cfe8] to-[#d955ea] text-transparent bg-clip-text">
+                          #
+                        </p>
+                        <p>{textEllipsis(item, 10)}</p>
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
-            <NewsLetters newsLetters={newsLetters} />
+
+            {/* newsletter section */}
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between items-center">
+                <p className="text-md AvneirDark text-[var(--dark-text)] select-none">
+                  NewsLetters
+                </p>
+                <div className="flex gap-6 justify-center items-center">
+                  <i
+                    className="ri-search-2-line text-[var(--light-icon-color)] w-full h-full text-2xl cursor-pointer hover:text-cyan-500"
+                    title="search"
+                  ></i>
+                  <div
+                    className="flex px-[3px] border-2 border-[var(--light-icon-color)] rounded-md justify-center items-center cursor-pointer hover:border-cyan-500 group"
+                    title="Add"
+                  >
+                    <i className="ri-add-fill  text-[var(--light-icon-color)] text-sm group-hover:text-cyan-500"></i>
+                  </div>
+                </div>
+              </div>
+              <NewsLetters newsLetters={newsLetters} />
+            </div>
+          </div>
+          {/* section 2 */}
+          <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
+            <UserStories users={users} />
+            <NewFrame
+              onClick={() => {
+                console.log("NewFrame clicked");
+                setAddFrameVisibility(true);
+              }}
+            />
+            <Frames
+              frames={frames}
+              commentInputSelected={commentInputSelected}
+              setCommentInputSelected={setCommentInputSelected}
+              comment={comment}
+              setComment={setComment}
+            />
+          </div>
+          {/* section 3 */}
+          <div className="flex flex-col h-[87.5%] left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4">
+            <p className="text-lg AvenirRegular text-[var(--dark-text)]">
+              Recent activity
+            </p>
+            <RecentActivity recentActivities={recentActivities} />
           </div>
         </div>
-        {/* section 2 */}
-        <div className="flex flex-col left-[22.5%] w-[55%] relative gap-4 pb-2 ">
-          <UserStories users={users} />
-          <Frames
-            frames={frames}
-            commentInputSelected={commentInputSelected}
-            setCommentInputSelected={setCommentInputSelected}
-            comment={comment}
-            setComment={setComment}
-          />
-        </div>
-        {/* section 3 */}
-        <div className="flex flex-col h-[87.5%] left-[78.25%] fixed w-[20%] bg-[var(--lighter-gray)] gap-4 rounded-3xl p-4">
-          <p className="text-lg AvenirRegular text-[var(--dark-text)]">
-            Recent activity
-          </p>
-          <RecentActivity recentActivities={recentActivities} />
-        </div>
+        {addFrameVisibility && (
+          <div className="flex w-full h-screen absolute  z-50">
+            <AddFrame
+              addFrameVisibility={addFrameVisibility}
+              setAddFrameVisibility={setAddFrameVisibility}
+            />
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-const ProfileCard = () => {
+const ProfileCard = ({ user }) => {
   return (
     <>
       <div className="flex flex-col w-full rounded-2xl overflow-hidden bg-[var(--light-gray)]">
@@ -257,10 +258,10 @@ const ProfileCard = () => {
           {/* username div */}
           <div className="flex flex-col w-full justify-center items-center ">
             <p className="text-md text-[var(--dark-text)] AvenirRegular">
-              John Wick
+              {user?.name}
             </p>
             <p className="text-xs text-[var(--light-text)] AvenirRegular hover:underline cursor-pointer ">
-              @wickteam
+              {user?.email}
             </p>
           </div>
           {/* description */}
@@ -269,11 +270,16 @@ const ProfileCard = () => {
           </p>
           <div className="flex flex-col gap-2 pt-1 ">
             <div className="flex w-full h-[0.1rem] bg-[var(--text-box-color)]"></div>
-            <div className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none">
-              <p className="text-sm text-white AvenirRegular" title="Profile">
-                My Profile
-              </p>
-            </div>
+            {user && (
+              <Link
+                to={`/profile/${user._id}`}
+                className="flex w-full bg-cyan-600 hover:bg-cyan-500 py-2 rounded-lg justify-center items-center cursor-pointer  transition-all duration-500 select-none"
+              >
+                <p className="text-sm text-white AvenirRegular" title="Profile">
+                  My Profile
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -407,13 +413,13 @@ const Frames = ({
                 <div className="flex w-12 h-12 p-1 rounded-2xl bg-[var(--light-gray)] cursor-pointer">
                   <img
                     className="flex w-full h-full  object-cover rounded-xl "
-                    src={item.userimg}
+                    src={item.thumbnail}
                   />
                 </div>
                 <div className="flex flex-col cursor-pointer">
                   <div className="flex gap-1 items-center">
                     <p className="text-sm AvenirLight text-[var(--regular-text)]">
-                      {item.email}
+                      {item.userId?.email}
                     </p>
                     <i
                       className="ri-verified-badge-fill text-blue-400"
@@ -421,12 +427,12 @@ const Frames = ({
                     ></i>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="text-md AvenirRegular text-[var(--dark-text)]">
-                      {item.username}
+                    <p className="text-md AvenirRegular text-[var(--dark-text)] capitalize">
+                      {item.userId?.name}
                     </p>
                     <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
                     <p className="text-xs AvenirRegular text-pink-400">
-                      {getTimeDifference(item.postTime)}
+                      {getTimeDifference(item.createdAt)}
                     </p>
                   </div>
                 </div>
@@ -437,6 +443,9 @@ const Frames = ({
                   <i className="ri-more-2-fill text-zinc-400 hover:text-zinc-100  text-md"></i>
                 </div>
               </div>
+              <p className="text-sm text-[var(--regular-text)] AvenirRegular">
+                {item.title}
+              </p>
               <p className="text-sm text-[var(--regular-text)] AvenirRegular">
                 {item.description}
               </p>
@@ -537,8 +546,8 @@ const Frames = ({
 const RecentActivity = ({ recentActivities }) => {
   return (
     <>
-    <style>
-      {`
+      <style>
+        {`
         .roundedScroll::-webkit-scrollbar {
           width: 6px; /* Optional: Set width for the scrollbar */
         }
@@ -554,7 +563,7 @@ const RecentActivity = ({ recentActivities }) => {
           background-color: #484848;
           border-radius: 8px;
         }`}
-    </style>
+      </style>
       <div className="flex flex-col gap-4 overflow-y-auto roundedScroll pr-1">
         {recentActivities?.length > 0 &&
           recentActivities.map((item, idx) => (
@@ -594,11 +603,39 @@ const RecentActivity = ({ recentActivities }) => {
                   </p>
                 </div>
                 <div className="flex rounded-xl bg-cyan-600 p-1 px-3 text-xs AvenirRegular text-white cursor-pointer hover:bg-cyan-500 transition-all duration-500">
-                  Thanks
+                  Clear
                 </div>
               </div>
             </div>
           ))}
+      </div>
+    </>
+  );
+};
+
+const NewFrame = ({ onClick }) => {
+  return (
+    <>
+      <div className="flex flex-col gap-4" onClick={onClick}>
+        <div className="flex flex-col gap-3 bg-[var(--lighter-gray)] rounded-2xl p-3">
+          <div className="flex gap-3">
+            <div className="flex w-10 h-10 p-1 rounded-2xl bg-[var(--light-gray)] cursor-pointer">
+              <img
+                className="flex w-full h-full  object-cover rounded-xl "
+                src={userImage}
+              />
+            </div>
+            <div className={`flex w-full p-[1px] rounded-xl overflow-hidden `}>
+              <div className="flex w-full bg-[var(--light-gray)] gap-2 rounded-xl px-4 items-center">
+                <input
+                  type="text"
+                  placeholder="Add your thoughts"
+                  className="bg-transparent w-full outline-none text-[var(--regular-text)] text-sm AvenirLight placeholder:text-[var(--light-text)]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

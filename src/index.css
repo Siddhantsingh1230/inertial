@@ -22,12 +22,25 @@ html {
 }
 
 /* here all colors are defined */
-:root {
+/* :root {
   --dark-gray : #1A1A1A;
   --light-gray : #282828;
   --lighter-gray : #2F2E2E;
   --hover-gray : #414141;
   --text-box-color : #222222;
+  --dark-text : #fbf9f9 ;
+  --regular-text : #bbbbbb ;
+  --light-text : #888888 ;
+  --icon-color : #AFAFAF;
+  --light-icon-color : #797979;
+} */
+
+:root {
+  --dark-gray : #080808;
+  --light-gray : #161616;
+  --lighter-gray : #131313;
+  --hover-gray : #1c1c1c;
+  --text-box-color : #151515;
   --dark-text : #fbf9f9 ;
   --regular-text : #bbbbbb ;
   --light-text : #888888 ;

@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import login8 from "../assets/images/login8.jfif";
 import logotrans from "../assets/images/Logotrans.png";
 import { textEllipsis } from "../utils/textFormatting";
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ user }) => {
+const Header = () => {
+  const user = useSelector((state)=>state.auth.user);
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex w-full gap-6 bg-[var(--dark-gray)] justify-between items-center p-6 py-4 fixed z-20">
@@ -26,6 +30,9 @@ const Header = ({ user }) => {
           <div
             className="flex flex-col items-center justify-center group cursor-pointer"
             title="Home"
+            onClick={()=>{
+              navigate("/");
+            }}
           >
             <i className="ri-home-5-fill text-2xl text-[var(--icon-color)] group-hover:text-cyan-500 "></i>
             <div className="flex w-1.5 h-1.5 group-hover:bg-cyan-500  rounded-full"></div>
@@ -63,7 +70,7 @@ const Header = ({ user }) => {
                 <img src={login8} className="w-full h-full object-cover "></img>
               </div>
               <p className="capitalize text-sm text-white AvenirLight cursor-default" >
-                {textEllipsis(user, 13)}
+                {textEllipsis(user?.name, 13)}
               </p>
             </div>
 
