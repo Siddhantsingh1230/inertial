@@ -185,7 +185,7 @@ const Profile = () => {
                   className="w-1/3 flex text-sm justify-center gap-1 AvenirLight py-1.5 rounded-lg  bg-pink-500 hover:bg-pink-600"
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `[![](${import.meta.env.VITE_BASE_URL}/v1/svg/ghub/${id})](${import.meta.env.VITE_BASE_URL}/profile/${id})`
+                      `[![](${import.meta.env.VITE_BASE_URL}/v1/svg/ghub/${id})](${import.meta.env.VITE_LOCAL_FRONTEND_URL}/profile/${id})`
                     );
                     Toasts("success", "Link copied to clipboard");
                   }}
